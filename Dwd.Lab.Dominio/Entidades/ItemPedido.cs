@@ -14,8 +14,8 @@
             if (ProdutoId == 0)
                 AdicionarCritica("Não foi identificado a referência do produto.");
 
-            if(Quantidade == 0)
-                AdicionarCritica("Quantidade não foi informada.")
+            if (Quantidade == 0)
+                AdicionarCritica("Quantidade não foi informada.");
         }
     }
 }

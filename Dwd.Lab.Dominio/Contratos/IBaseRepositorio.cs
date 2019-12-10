@@ -10,7 +10,7 @@ namespace Dwd.Lab.Dominio.Contratos
         IEnumerable<TEntity> RetornarTodos();
         void Alterar(TEntity entity);
         void Remover(TEntity entity);
-        
+
 
     }
 }
