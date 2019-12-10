@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Dwd.Lab.Dominio\Dwd.Lab.Dominio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Map\" />
-  </ItemGroup>
-
 </Project>
