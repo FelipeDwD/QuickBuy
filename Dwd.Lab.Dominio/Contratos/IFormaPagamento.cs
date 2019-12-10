@@ -1,11 +1,9 @@
-﻿namespace Dwd.Lab.Dominio.Contratos
+﻿using Dwd.Lab.Dominio.ObjetoDeValor;
+
+namespace Dwd.Lab.Dominio.Contratos
 {
-    public interface IFormaPagamento
-    {
-        int EhNaoDefinido();
-        int EhBoleto();
-        int EhCartaoCredito();
-        int EhDeposito();
+    public interface IFormaPagamento : IBaseRepositorio<FormaPagamento>
+    {       
 
         
     }

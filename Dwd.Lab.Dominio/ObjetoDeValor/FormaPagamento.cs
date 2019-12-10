@@ -1,13 +1,20 @@
 ﻿using Dwd.Lab.Dominio.Contratos;
+using Dwd.Lab.Dominio.Entidades;
 using Dwd.Lab.Dominio.Enumeradores;
+using System.Collections.Generic;
 
 namespace Dwd.Lab.Dominio.ObjetoDeValor
 {
-    public class FormaPagamento : IFormaPagamento
+    public class FormaPagamento 
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
+
+        /// <summary>
+        ///  Forma de pagamento pode ter nenhum ou vários pedidos
+        /// </summary>
+        public virtual ICollection<Pedido> Pedidos { get; set; }
 
         public int EhBoleto()
         {

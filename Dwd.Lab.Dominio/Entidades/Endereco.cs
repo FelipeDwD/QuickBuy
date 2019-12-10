@@ -1,4 +1,6 @@
-﻿namespace Dwd.Lab.Dominio.Entidades
+﻿using System.Collections.Generic;
+
+namespace Dwd.Lab.Dominio.Entidades
 {
     public class Endereco
     {
@@ -9,6 +11,11 @@
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string Cep { get; set; }
+
+        /// <summary>
+        ///  Endereço poder ter nenhum ou vários pedidos
+        /// </summary>
+        public ICollection<Pedido> Pedidos { get; set; }
 
     }
 }

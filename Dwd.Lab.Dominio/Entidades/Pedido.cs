@@ -15,9 +15,7 @@ namespace Dwd.Lab.Dominio.Entidades
         public int UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
         public int FormaPagamentoId { get; set; }
-        public virtual FormaPagamento FormaPagamento { get; set; }
-
-        
+        public virtual FormaPagamento FormaPagamento { get; set; }        
 
         /// <summary>
         ///  Pedido deve ter pelo menos um ou vários itens
