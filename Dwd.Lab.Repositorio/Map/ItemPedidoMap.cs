@@ -24,6 +24,8 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasOne(ip => ip.Pedido)
                 .WithMany(ip => ip.ItemsPedido)
                 .HasForeignKey(ip => ip.PedidoId);
+
+            builder.ToTable("ItemPedido");
         }
     }
 }

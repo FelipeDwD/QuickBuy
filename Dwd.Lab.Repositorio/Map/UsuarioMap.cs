@@ -30,7 +30,9 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(u => u.Senha)
                 .IsRequired()
-                .HasMaxLength(400);            
+                .HasMaxLength(400);
+
+            builder.ToTable("Usuario");
 
         }
     }

@@ -38,6 +38,7 @@ namespace Dwd.Lab.Repositorio.Map
                 .WithMany(u => u.Pedidos)
                 .HasForeignKey(p => p.UsuarioId);
 
+            builder.ToTable("Pedido");
           
 
         }
