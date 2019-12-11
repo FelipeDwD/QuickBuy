@@ -20,7 +20,7 @@ namespace Dwd.Lab.Dominio.Entidades
         /// <summary>
         ///  Pedido deve ter pelo menos um ou vários itens
         /// </summary>
-        public ICollection<ItemPedido> ItemsPedido { get; set; }
+        public virtual ICollection<ItemPedido> ItemsPedido { get; set; }
 
         protected override void Validate()
         {

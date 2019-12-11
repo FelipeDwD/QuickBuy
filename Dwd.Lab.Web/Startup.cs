@@ -14,24 +14,21 @@ namespace Dwd.Lab.Web
     {
         public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder();
-            builder.AddJsonFile("config.json", optional: false, reloadOnChange:true);
-
-            this.Configuration = builder.Build();
+            Configuration = configuration;
+            
         }
 
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connectionString = Configuration.GetConnectionString("DwdLab");
+           
             services.AddDbContext<LabDataContext>(option =>
-                                                    option.UseSqlServer(connectionString,
-                                                    m => m.MigrationsAssembly("Dwd.Lab.Repositorio")));
-
+                                                    option.UseLazyLoadingProxies()
+                                                    .UseSqlServer(Configuration.GetConnectionString("DwdLab")));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

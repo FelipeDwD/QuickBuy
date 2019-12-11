@@ -1,5 +1,6 @@
 ﻿using Dwd.Lab.Dominio.Entidades;
 using Dwd.Lab.Dominio.ObjetoDeValor;
+using Dwd.Lab.Repositorio.Map;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dwd.Lab.Repositorio.Contexto
@@ -13,6 +14,21 @@ namespace Dwd.Lab.Repositorio.Contexto
         public DbSet<Produto> Produto { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
 
+        public LabDataContext(DbContextOptions<LabDataContext> options) : base(options)
+        {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new PedidoMap());
+            modelBuilder.ApplyConfiguration(new ItemPedidoMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
+            modelBuilder.ApplyConfiguration(new FormaPagamentoMap());
+        }
     }
 }

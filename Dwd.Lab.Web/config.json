@@ -1,5 +1,3 @@
 {
-  "ConnectionStrings": {
-    "DwdLab": "Server=localhost;Database=DwdLab;User Id=DwdLabDB; Password=lab1141;"
-  }
+ 
 }

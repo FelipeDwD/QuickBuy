@@ -13,6 +13,6 @@ namespace Dwd.Lab.Dominio.Entidades
         /// <summary>
         /// Um usuário pode ter nenhum ou muitos pedidos
         /// </summary>
-        public ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }
