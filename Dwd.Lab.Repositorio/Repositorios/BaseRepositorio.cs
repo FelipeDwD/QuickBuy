@@ -1,38 +1,49 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dwd.Lab.Dominio.Contratos;
+using Dwd.Lab.Repositorio.Contexto;
 
 namespace Dwd.Lab.Repositorio.Repositorios
 {
     public class BaseRepositorio<TEntity> : IBaseRepositorio<TEntity> where TEntity : class
     {
-        public void Alterar(TEntity entity)
+
+        protected readonly LabDataContext LabDataContext;
+
+        public BaseRepositorio(LabDataContext labDataContext)
         {
-            throw new System.NotImplementedException();
+            LabDataContext = labDataContext;
+        }
+        public void Adicionar(TEntity entity)
+        {
+            LabDataContext.Set<TEntity>().Add(entity);
+            LabDataContext.SaveChanges();
+        }
+        public void Atualizar(TEntity entity)
+        {
+            LabDataContext.Set<TEntity>().Update(entity);
+            LabDataContext.SaveChanges();
         }       
 
         public void Remover(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            LabDataContext.Remove(entity);
+            LabDataContext.SaveChanges();
         }
 
         public TEntity RetornarPorId(int id)
         {
-            throw new System.NotImplementedException();
+            return LabDataContext.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> RetornarTodos()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Salvar(TEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
+            return LabDataContext.Set<TEntity>().ToList();
+        }       
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            LabDataContext.Dispose();
         }
     }
 }

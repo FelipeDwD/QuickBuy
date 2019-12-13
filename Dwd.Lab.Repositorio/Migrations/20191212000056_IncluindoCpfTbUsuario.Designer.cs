@@ -4,14 +4,16 @@ using Dwd.Lab.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
     [DbContext(typeof(LabDataContext))]
-    partial class LabDataContextModelSnapshot : ModelSnapshot
+    [Migration("20191212000056_IncluindoCpfTbUsuario")]
+    partial class IncluindoCpfTbUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,12 +166,10 @@ namespace Dwd.Lab.Repositorio.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar")
-                        .HasMaxLength(100);
+                        .HasMaxLength(70);
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("varchar")
                         .HasMaxLength(30);
 
                     b.HasKey("Id");

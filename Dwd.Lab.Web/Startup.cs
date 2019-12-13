@@ -1,4 +1,6 @@
+using Dwd.Lab.Dominio.Contratos;
 using Dwd.Lab.Repositorio.Contexto;
+using Dwd.Lab.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,13 @@ namespace Dwd.Lab.Web
             services.AddDbContext<LabDataContext>(option =>
                                                     option.UseLazyLoadingProxies()
                                                     .UseSqlServer(Configuration.GetConnectionString("DwdLab")));
+
+            //Todo código que tiver no construtor a interface IXRepositorio,
+            //automaticamente receberá uma instância de XRepositorio,
+            //conforme abaixo:
+            services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

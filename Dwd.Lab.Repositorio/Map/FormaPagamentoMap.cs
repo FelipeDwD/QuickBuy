@@ -18,12 +18,14 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(fp => fp.Nome)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(30)
+                .HasColumnType("varchar");
 
             builder
                 .Property(fp => fp.Descricao)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(100)
+                .HasColumnType("varchar");
 
             builder.ToTable("FormaPagamento");
         }

@@ -28,7 +28,7 @@ namespace Dwd.Lab.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new PedidoMap());
             modelBuilder.ApplyConfiguration(new ItemPedidoMap());
             modelBuilder.ApplyConfiguration(new ProdutoMap());
-            modelBuilder.ApplyConfiguration(new FormaPagamentoMap());
+            modelBuilder.ApplyConfiguration(new FormaPagamentoMap());            
         }
     }
 }
