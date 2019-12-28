@@ -2,7 +2,7 @@
 
 namespace Dwd.Lab.Dominio.Contratos
 {
-    public interface IFormaPagamento : IBaseRepositorio<FormaPagamento>
+    public interface IFormaPagamentoRepositorio : IBaseRepositorio<FormaPagamento>
     {       
 
         

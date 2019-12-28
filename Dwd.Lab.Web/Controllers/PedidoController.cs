@@ -2,17 +2,20 @@
 using Dwd.Lab.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Dwd.Lab.Web.Controllers
 {
     [Route("api/[Controller]")]
-    public class ProdutoController : Controller
+    public class PedidoController : Controller
     {
-        private readonly IProdutoRepositorio _produtoRepositorio;
+        private readonly IPedidoRepositorio _pedidoRepositorio;
 
-        public ProdutoController(IProdutoRepositorio produtoRepositorio)
+        public PedidoController(IPedidoRepositorio pedidoRepositorio)
         {
-            this._produtoRepositorio = produtoRepositorio;
+            this._pedidoRepositorio = pedidoRepositorio;
         }
 
         [HttpGet]
@@ -20,9 +23,8 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                var produtos = _produtoRepositorio.RetornarTodos();
-
-                return Ok(produtos);
+                var pedidos = this._pedidoRepositorio.RetornarTodos();
+                return Ok(pedidos);
             }
             catch (Exception ex)
             {
@@ -31,20 +33,17 @@ namespace Dwd.Lab.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Produto produto)
+        public IActionResult Post([FromBody] Pedido pedido)
         {
             try
             {
-                _produtoRepositorio.Adicionar(produto);
-                return Created("api/produto", produto);
+                this._pedidoRepositorio.Adicionar(pedido);
+                return Created("api/Controller", pedido);
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.ToString());
             }
         }
-
-
     }
 }

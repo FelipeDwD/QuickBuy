@@ -35,7 +35,7 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(u => u.CPF)
                 .IsRequired()
-                .HasMaxLength(12);
+                .HasMaxLength(15);
 
             builder.ToTable("Usuario");
 

@@ -37,6 +37,9 @@ namespace Dwd.Lab.Web
             //conforme abaixo:
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IFormaPagamentoRepositorio, FormaPagamentoRepositorio>();
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

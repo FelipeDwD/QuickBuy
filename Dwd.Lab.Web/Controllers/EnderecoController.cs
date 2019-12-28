@@ -29,7 +29,7 @@ namespace Dwd.Lab.Web.Controllers
             }
         }
 
-        
+        [HttpPost]
         public IActionResult Post([FromBody]Endereco endereco)
         {
             try

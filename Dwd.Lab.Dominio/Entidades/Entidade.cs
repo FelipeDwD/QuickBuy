@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -14,17 +15,16 @@ namespace Dwd.Lab.Dominio.Entidades
             get { return _mensagensValidacao ?? (_mensagensValidacao = new List<string>());  }
         }
 
-        protected abstract void Validate();
-
-        protected void LimparMensagensValidacao()
+        public Entidade()
         {
-            MensagemValidacao.Clear();
+            Validate();
         }
 
-        protected void AdicionarCritica(string mensagem)
-        {
-            MensagemValidacao.Add($"Critíca: {mensagem}");
-        }
+        /// <summary>
+        ///  Implementar método "GerarExcecao()"
+        /// </summary>
+        protected abstract void Validate();        
+               
 
         public bool EhValido
         {

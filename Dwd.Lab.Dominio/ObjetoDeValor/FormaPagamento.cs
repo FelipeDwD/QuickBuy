@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Dwd.Lab.Dominio.ObjetoDeValor
 {
-    public class FormaPagamento 
+    public class FormaPagamento
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -15,6 +15,10 @@ namespace Dwd.Lab.Dominio.ObjetoDeValor
         ///  Forma de pagamento pode ter nenhum ou vários pedidos
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
+
+        public FormaPagamento() : base()
+        {                    
+        }
 
         public int EhBoleto()
         {
@@ -35,5 +39,7 @@ namespace Dwd.Lab.Dominio.ObjetoDeValor
         {
             return this.Id = (int)TipoFormaPagamentoEnum.NaoDefinido;
         }
+
+      
     }
 }
