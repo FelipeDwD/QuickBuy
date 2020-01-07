@@ -3,9 +3,14 @@
    max-width: 420px;
    padding: 15px;
    margin: auto;  
+   margin-top: 20%;      
 }
 
 .form-label-group {
    position: relative;
    margin-bottom: 1rem;  
+}
+
+footer{
+   color: #C0C0C0;
 }
