@@ -10,29 +10,49 @@
             class="form-control" 
             placeholder="Digite seu e-mail" 
             [(ngModel)]="usuario.email"
-            #email="ngModel"
-            required/>    
-            <div *ngIf="email.invalid && (email.dirty || email.touched)">              
-                <div class="alert alert-danger" role="alert" *ngIf="email.errors.required">
-                  E-mail é de preenchimento obrigatório
-                </div>
-              </div>     
+            [ngClass] = "{
+              'is-valid': email.valid,
+              'is-invalid': email.invalid && (email.touched || email.dirty)
+            }"
+            #email="ngModel"                       
+            email 
+            required/>  
+            <div class="invalid-feedback" *ngIf="email.touched"> 
+              <!--Verificando se a instrução required foi violada-->             
+              <div *ngIf="email.errors.required">
+                Favor informar um e-mail
+              </div>
+              <!---->
+              <div *ngIf="email.errors.email">
+                Formato incorreto
+              </div>
+            </div> 
           </div>
           <div class="form-label-group">
             <input type="password" id="senha" name="senha" 
             class="form-control" 
             placeholder="Digite sua senha" 
             [(ngModel)]="usuario.senha"
+            [ngClass] = "{
+              'is-invalid': senha.invalid && senha.touched,
+              'is-valid': senha.valid
+            }"
             #senha="ngModel"
             required/> 
-          </div>
+            <div class="invalid-feedback" *ngIf="senha.touched">
+              <div *ngIf="senha.errors.required">
+                Favor informar uma senha
+              </div>            
+            </div>  
+          </div>           
+        
           <div class="form-label-group"> 
               <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="loginUsuario()" >Entrar</button>         
           </div>
 
           <div class="form-label-group">
             <div class="alert alert-success" role="alert" *ngIf="logado">
-              Logado com sucesso
+              Logado com sucesso <b>-></b>
             </div>
 
           </div>         
