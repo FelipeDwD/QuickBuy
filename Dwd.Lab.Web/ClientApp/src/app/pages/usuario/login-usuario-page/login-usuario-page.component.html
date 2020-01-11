@@ -17,12 +17,12 @@
             #email="ngModel"                       
             email 
             required/>  
-            <div class="invalid-feedback" *ngIf="email.touched"> 
+            <div class="invalid-feedback" *ngIf="email.invalid"> 
               <!--Verificando se a instrução required foi violada-->             
               <div *ngIf="email.errors.required">
                 Favor informar um e-mail
               </div>
-              <!---->
+              <!--Verificando se a instrução do tipo email foi violada-->
               <div *ngIf="email.errors.email">
                 Formato incorreto
               </div>
@@ -40,6 +40,7 @@
             #senha="ngModel"
             required/> 
             <div class="invalid-feedback" *ngIf="senha.touched">
+              <!--Verifica se a instrução required foi violada-->
               <div *ngIf="senha.errors.required">
                 Favor informar uma senha
               </div>            
