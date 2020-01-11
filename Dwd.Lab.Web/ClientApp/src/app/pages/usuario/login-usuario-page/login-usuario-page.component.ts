@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/Models/usuario';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-usuario-page',
@@ -14,17 +16,19 @@ export class LoginUsuarioPageComponent implements OnInit {
   public logado: boolean = false;
   
 
-  constructor() {
+  constructor(private router: Router) {
     this.usuario = new Usuario();
    }
 
   ngOnInit() {
     
-  }
+  }  
 
   loginUsuario() : void{     
     if(this.usuario.email == this.emailSis && this.usuario.senha == this.senhaSis ){
-        this.logado = true;
+        sessionStorage.setItem("usuario-logado", "1");
+        this.logado = true;  
+        this.router.navigate(['']);      
     }
   }
 
