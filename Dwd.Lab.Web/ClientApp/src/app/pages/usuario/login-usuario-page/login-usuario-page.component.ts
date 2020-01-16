@@ -34,10 +34,10 @@ export class LoginUsuarioPageComponent implements OnInit {
     this.usuarioService.verificarUsuario(this.usuario)
     .subscribe(
       data => {
-
+        console.log(data);
       },
       error => {
-
+        console.log(error.error);
       }
     );
 

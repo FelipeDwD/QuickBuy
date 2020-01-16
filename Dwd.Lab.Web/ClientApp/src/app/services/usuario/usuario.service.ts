@@ -19,21 +19,20 @@ export class UsuarioService{
     private baseURL: string;
 
     constructor(
-        private http: HttpClient,
-        @Inject('BASE_URL') baseUrl: string) {        
-        this.baseURL = baseUrl;
-    }
+        private http: HttpClient) {}
 
     public verificarUsuario(usuario: Usuario): Observable<Usuario>{
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         var body = {
             email: usuario.email,
-            senha: usuario.senha
+            senha: usuario.senha,
+            nome: "Felipe",
+            sobrenome: "Neves"
         }
 
-        //this.baseURL = raiz do site que pode ser exemplo: http://www.dwd.lab.web.com/
-        return this.http.post<Usuario>(this.baseURL + "api/usuario", body, {headers});
+        this.baseURL = "https://localhost:44396/api/usuario/verificarUsuario"
+        return this.http.post<Usuario>(this.baseURL, body, {headers});
     }
 
 }

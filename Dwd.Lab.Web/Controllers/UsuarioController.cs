@@ -33,13 +33,28 @@ namespace Dwd.Lab.Web.Controllers
             
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] Usuario usuario)
+        [HttpPost("VerificarUsuario")]
+        public ActionResult VerificarUsuario([FromBody] Usuario usuario)
         {
             try
             {
-                this._usuarioRepositorio.Adicionar(usuario);
-                return Created("api/Controller", usuario);
+                if (usuario.Email == "felipeneves089@gmail.com" && usuario.Senha == "123")
+                    return Ok(usuario);
+
+                return BadRequest("Usuário ou senha inválido");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Post()
+        {
+            try
+            {          
+                return Ok();
             }
             catch (Exception ex)
             {
