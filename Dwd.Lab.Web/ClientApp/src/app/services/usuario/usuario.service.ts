@@ -18,6 +18,20 @@ export class UsuarioService{
 
     private baseURL: string;
 
+    public user: Usuario;
+
+   public userLogado():boolean{
+       if(this.user != null)
+       return true;
+       
+       return false;
+   }
+
+    public setUser(user: Usuario){
+        this.user = user;
+    }
+
+
     constructor(
         private http: HttpClient) {}
 

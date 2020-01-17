@@ -10,10 +10,7 @@
             class="form-control" 
             placeholder="Digite seu e-mail" 
             [(ngModel)]="usuario.email"
-            [ngClass] = "{
-              'is-valid': email.valid,
-              'is-invalid': email.invalid && (email.touched || email.dirty)
-            }"
+            [ngClass] = "{'is-invalid': email.invalid && (email.touched || email.dirty)}"
             #email="ngModel"                       
             email 
             required/>  
@@ -33,13 +30,10 @@
             class="form-control" 
             placeholder="Digite sua senha" 
             [(ngModel)]="usuario.senha"
-            [ngClass] = "{
-              'is-invalid': senha.invalid && senha.touched,
-              'is-valid': senha.valid
-            }"
+            [ngClass] = "{'is-invalid': senha.invalid && senha.touched }"
             #senha="ngModel"
             required/> 
-            <div class="invalid-feedback" *ngIf="senha.touched">
+            <div class="invalid-feedback" *ngIf="senha.invalid">
               <!--Verifica se a instrução required foi violada-->
               <div *ngIf="senha.errors.required">
                 Favor informar uma senha
@@ -52,8 +46,8 @@
           </div>
 
           <div class="form-label-group">
-            <div class="alert alert-success" role="alert" *ngIf="logado">
-              Logado com sucesso <b>-></b>
+            <div class="alert alert-danger" role="alert" *ngIf="mensagem">
+              {{ mensagem }}
             </div>
 
           </div>         

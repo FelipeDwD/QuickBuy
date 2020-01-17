@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/Models/usuario';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { error } from 'util';
 
 @Component({
   selector: 'app-login-usuario-page',
@@ -11,11 +12,9 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class LoginUsuarioPageComponent implements OnInit {  
 
-  public usuario;
-  public emailSis = "felipeneves089@gmail.com";
-  public senhaSis = "123";
-  public logado: boolean = false;
-  public routerCall;
+  public usuario;   
+  public returnUrl: string;
+  public mensagem: string;
   
 
   constructor(
@@ -25,7 +24,7 @@ export class LoginUsuarioPageComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.routerCall = this.activatedRouter.snapshot.queryParams['returnUrl'];
+    this.returnUrl = this.activatedRouter.snapshot.queryParams['returnUrl'];
     this.usuario = new Usuario();
   }  
 
@@ -34,20 +33,22 @@ export class LoginUsuarioPageComponent implements OnInit {
     this.usuarioService.verificarUsuario(this.usuario)
     .subscribe(
       data => {
-        console.log(data);
+        //Essa linha será executada no caso de retorno sem erro.        
+        let usuarioRetorno: Usuario;
+        usuarioRetorno = data;
+        this.usuarioService.setUser(this.usuario);       
+        if(this.returnUrl == undefined){
+          //Caso o usuário ir direto pelo login (para logar)
+          //Se credenciais corretas: ele será redirecinado para o home
+          this.router.navigate(['/']);
+        }else{
+          this.router.navigate([this.returnUrl]);
+        }          
       },
-      error => {
-        console.log(error.error);
+      err => {       
+        this.mensagem = err.error;
       }
     );
-
-
-    //if(this.usuario.email == this.emailSis && this.usuario.senha == this.senhaSis ){
-        //sessionStorage.setItem("usuario-logado", "1");
-        //this.logado = true;  
-        //this.router.navigate([this.routerCall]);  
-
-
     }
   }
 
