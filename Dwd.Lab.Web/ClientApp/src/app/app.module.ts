@@ -29,7 +29,7 @@ import { UsuarioService } from './services/usuario/usuario.service';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, canActivate:[GuardaRotas], pathMatch: 'full' },
       { path: 'counter', component: CounterComponent, canActivate: [GuardaRotas] },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [GuardaRotas] },
       { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },

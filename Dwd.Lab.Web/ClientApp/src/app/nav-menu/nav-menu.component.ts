@@ -25,11 +25,17 @@ export class NavMenuComponent {
     this.isExpanded = !this.isExpanded;
   }
 
-  usuarioLogado():boolean{
-    return this.usuarioServico.getUser() != null;   
+  usuarioLogado(): boolean{
+    let logado = this.usuarioServico.logado();
+    if(logado){
+      return true;
+    }else{
+      return false;
+    }
   }
 
-  sairUsuario():void{
-    this.usuarioServico.setUser(null);
+  logout():void{
+    this.usuarioServico.logout();
   }
+
 }
