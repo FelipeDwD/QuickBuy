@@ -35,7 +35,8 @@ import { CadastroUsuarioPageComponent } from './pages/usuario/cadastro-usuario-p
       { path: 'counter', component: CounterComponent, canActivate: [GuardaRotas] },
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [GuardaRotas] },
       { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },
-      { path: 'login-usuario', component: LoginUsuarioPageComponent}
+      { path: 'login-usuario', component: LoginUsuarioPageComponent},
+      { path: 'cadastro-usuario', component: CadastroUsuarioPageComponent}
     ])
   ],
   providers: [UsuarioService],
