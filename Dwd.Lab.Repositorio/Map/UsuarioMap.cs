@@ -33,7 +33,7 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasMaxLength(400);
 
             builder
-                .Property(u => u.CPF)
+                .Property(u => u.Cpf)
                 .IsRequired()
                 .HasMaxLength(15);
 

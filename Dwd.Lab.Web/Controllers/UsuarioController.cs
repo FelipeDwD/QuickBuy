@@ -49,16 +49,18 @@ namespace Dwd.Lab.Web.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost("adicionar")]
+        public IActionResult Adicionar([FromBody] Usuario usuario)
         {
             try
-            {          
-                return Ok();
+            {
+                this._usuarioRepositorio.Adicionar(usuario);
+
+                return Created("api/usuario", usuario);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());   
+                return BadRequest(ex.Message.ToString());
             }
         }
     }
