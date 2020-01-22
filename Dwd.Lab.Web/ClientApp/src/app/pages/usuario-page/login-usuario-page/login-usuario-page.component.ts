@@ -52,7 +52,7 @@ export class LoginUsuarioPageComponent implements OnInit {
   }
 
   cadastroUsuario():void{
-    this.router.navigate(['/cadastro-usuario']);
+    this.router.navigate(['/usuario-form']);
   }
 }
 

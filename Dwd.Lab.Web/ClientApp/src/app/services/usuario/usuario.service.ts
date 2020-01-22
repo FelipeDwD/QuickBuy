@@ -79,4 +79,11 @@ export class UsuarioService extends BaseService{
         return this.http.post<Usuario>(this.baseURL, body, {headers});
     }
 
+    public retornarTodos():Observable<Usuario>{
+
+        this.baseURL = `${this.urlApi}/usuario`
+
+        return this.http.get<Usuario>(this.baseURL)
+    }
+
 }
