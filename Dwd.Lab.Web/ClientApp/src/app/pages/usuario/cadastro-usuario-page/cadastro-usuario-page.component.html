@@ -1,3 +1,84 @@
-<p>
-  cadastro-usuario-page works!
-</p>
+<form class="form-group">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="nomeUsuario">*Nome: </label>
+      <input class="form-control" type="text" name="nomeUsuario" id="nomeUsuario" 
+      placeholder="Informe seu nome"
+      [(ngModel)]="usuario.nome"
+      nome 
+      #nome="ngModel"
+      [ngClass]= "{'is-invalid': nome.touched && nome.invalid}" 
+      required/>
+      <div class="invalid-feedback" *ngIf="nome.touched && nome.errors.required">
+        <p>É obrigatório informar um nome.</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="sobrenomeUsuario">*Sobrenome:</label>
+      <input class="form-control" type="text" name="sobrenomeUsuario" id="sobrenomeUsuario" 
+      placeholder="Informe seu sobrenome" 
+      required
+      [(ngModel)]="usuario.sobrenome"
+      sobrenome
+      #sobrenome="ngModel"
+      [ngClass]="{'is-invalid': sobrenome.touched && sobrenome.invalid}"/>
+      <div class="invalid-feedback" *ngIf="sobrenome.touched && sobrenome.errors.required">
+        <p>É obrigatório informar um sobrenome.</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="cpfUsuario">*CPF:</label>
+      <input class="form-control" type="text" name="cpfUsuario" id="cpfUsuario" 
+      placeholder="Informe seu CPF" 
+      required
+      [(ngModel)]="usuario.cpf"
+      cpf
+      #cpf="ngModel"
+      [ngClass]="{'is-invalid': cpf.touched && cpf.invalid}"
+      />
+      <div class="invalid-feedback" *ngIf="cpf.touched && cpf.errors.required">
+        <p>É obrigatório informar um CPF.</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="emailUsuario">*E-mail:</label>
+        <input class="form-control" type="text" name="emailUsuario" id="emailUsuario" 
+        placeholder="Informe seu e-mail" 
+        required
+        [(ngModel)]="usuario.email"
+        email
+        #email="ngModel"
+        [ngClass]="{'is-invalid': email.touched && email.invalid}"/>
+        <div class="invalid-feedback" *ngIf="email.touched && email.errors.required">
+          <p>É obrigatório informar um e-mail.</p>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="senhaUsuario">*Senha: </label>
+        <input class="form-control" type="password" name="senhaUsuario" id="senhaUsuario" 
+        placeholder="Informe uma senha" 
+        required
+        [(ngModel)]="usuario.senha"
+        senha
+        #senha="ngModel"
+        [ngClass]="{'is-invalid': senha.touched && senha.invalid}"/>
+        <div class="invalid-feedback" *ngIf="senha.touched && senha.errors.required"> 
+          <p>É obrigatório informar uma senha.</p>
+        </div>
+      </div>
+    </div>    
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <button class="btn btn-secondary btn-block" (click)="back()">Voltar</button>
+      </div>
+      <div class="col-md-6 -mb-3">
+        <button class="btn btn-primary btn-block" (click)="cadastrarUsuario()">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</form>

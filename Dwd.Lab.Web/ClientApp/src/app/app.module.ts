@@ -14,6 +14,9 @@ import { ProdutoComponent } from './pages/produto-page/produto.component';
 import { GuardaRotas } from './autorizacao/guarda.rotas';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { CadastroUsuarioPageComponent } from './pages/usuario/cadastro-usuario-page/cadastro-usuario-page.component';
+import { Usuario } from './Models/usuario';
+import { FormComponent } from './shared/form/form.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { CadastroUsuarioPageComponent } from './pages/usuario/cadastro-usuario-p
     FetchDataComponent,
     ProdutoComponent,
     LoginUsuarioPageComponent,
-    CadastroUsuarioPageComponent
+    CadastroUsuarioPageComponent,
+    FormComponent,   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

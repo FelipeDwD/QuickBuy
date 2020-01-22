@@ -9,15 +9,21 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 //Rxjs: Biblioteca para programação reativa do JavaScript, chamadas assíncronas aos serviços do back-end.
 import { Observable } from "rxjs";
 import { Usuario } from "src/app/Models/usuario";
+import { BaseService } from "./base.service";
 
 @Injectable({
     providedIn: "root"
 })
 
-export class UsuarioService {
+export class UsuarioService extends BaseService{
 
     private baseURL: string;
     public user: Usuario;
+
+    constructor(
+        private http: HttpClient) {
+            super();
+         }
 
     public get getUser() {
         return this.user;
@@ -44,23 +50,33 @@ export class UsuarioService {
         }else{
             return false;
         }
-    }
-
-    constructor(
-        private http: HttpClient) { }
+    }    
 
     public verificarUsuario(usuario: Usuario): Observable<Usuario> {
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         var body = {
             email: usuario.email,
-            senha: usuario.senha,
-            nome: "Felipe",
-            sobrenome: "Neves"
+            senha: usuario.senha,           
         }
 
-        this.baseURL = "https://localhost:44396/api/usuario/verificarUsuario"
+        this.baseURL = `${this.urlApi}/usuario/verificarusuario`
         return this.http.post<Usuario>(this.baseURL, body, { headers });
+    }
+
+    public cadastrarNovoUsuario(usuario: Usuario): Observable<Usuario>{
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        let body = {
+            nome: usuario.nome,
+            sobrenome: usuario.sobrenome,
+            cpf: usuario.cpf,
+            email: usuario.email,
+            senha: usuario.senha
+        }
+
+        this.baseURL = `${this.urlApi}/usuario/adicionar`;
+        return this.http.post<Usuario>(this.baseURL, body, {headers});
     }
 
 }
