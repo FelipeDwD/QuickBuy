@@ -35,6 +35,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   cadastrarUsuario():void{
+    this.ativarSpinner = true;
     this.usuarioService.cadastrarNovoUsuario(this.usuario)
     .subscribe(
       ok => {
@@ -42,7 +43,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
       this.mostraDialogo(`Cadastro efetuado com sucesso`, `success`, 2000);
     },
     err =>{
-      console.log(err);
+      this.ativarSpinner = false;
     });
       
     }

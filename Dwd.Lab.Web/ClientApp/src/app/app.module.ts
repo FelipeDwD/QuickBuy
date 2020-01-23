@@ -6,9 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { ProdutoComponent } from './pages/produto-page/produto.component';
 import { GuardaRotas } from './autorizacao/guarda.rotas';
 import { UsuarioService } from './services/usuario/usuario.service';
 import { Usuario } from './Models/usuario';
@@ -18,32 +15,35 @@ import { CadastroUsuarioPageComponent } from './pages/usuario-page/usuario-form-
 import { UsuarioGridPageComponent } from './pages/usuario-page/usuario-grid-page/usuario-grid-page.component';
 import { UsuarioMainPageComponent } from './pages/usuario-page/usuario-main-page/usuario-main-page.component';
 import { GridComponent } from './shared/grid/grid.component';
+import { ProdutoGridPageComponent } from './pages/produto-page/produto-grid-page/produto-grid-page.component';
+import { ProdutoFormPageComponent } from './pages/produto-page/produto-form-page/produto-form-page.component';
+import { ProdutoMainPageComponent } from './pages/produto-page/produto-main-page/produto-main-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    ProdutoComponent,
+    HomeComponent,    
     LoginUsuarioPageComponent,
     CadastroUsuarioPageComponent,
     FormComponent,
     UsuarioGridPageComponent,
     UsuarioMainPageComponent,
-    GridComponent,   
+    GridComponent,
+    ProdutoMainPageComponent,
+    ProdutoGridPageComponent,
+    ProdutoFormPageComponent,   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, canActivate:[GuardaRotas], pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent, canActivate: [GuardaRotas] },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [GuardaRotas] },
-      { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },
+      { path: '', component: HomeComponent, canActivate:[GuardaRotas], pathMatch: 'full' },      
+      { path: 'produto-main', component: ProdutoMainPageComponent, canActivate: [GuardaRotas] },
+      { path: 'produto-form', component: ProdutoFormPageComponent, canActivate: [GuardaRotas]},
+      { path: 'produto-grid', component: ProdutoGridPageComponent, canActivate: [GuardaRotas]},
       { path: 'login-usuario', component: LoginUsuarioPageComponent},
       { path: 'usuario-form', component: CadastroUsuarioPageComponent},
       { path: 'usuario-main', component: UsuarioMainPageComponent, canActivate: [GuardaRotas]},

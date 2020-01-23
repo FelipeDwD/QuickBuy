@@ -42,7 +42,10 @@
           </div>           
         
           <div class="form-label-group"> 
-              <button class="btn btn-dark btn-block" type="submit" (click)="loginUsuario()" >Entrar</button>         
+              <button class="btn btn-dark btn-block" type="submit" (click)="loginUsuario()" [disabled]="ativarSpinner" >
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>                
+                Entrar
+              </button>         
           </div>
 
           <div class="form-label-group">

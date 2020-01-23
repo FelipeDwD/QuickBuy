@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 //Rxjs: Biblioteca para programação reativa do JavaScript, chamadas assíncronas aos serviços do back-end.
 import { Observable } from "rxjs";
 import { Usuario } from "src/app/Models/usuario";
-import { BaseService } from "./base.service";
+import { BaseService } from "../base.service";
 
 @Injectable({
     providedIn: "root"
@@ -52,7 +52,7 @@ export class UsuarioService extends BaseService{
         }
     }    
 
-    public verificarUsuario(usuario: Usuario): Observable<Usuario> {
+    public loginUser(usuario: Usuario): Observable<Usuario> {
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         var body = {
@@ -60,7 +60,7 @@ export class UsuarioService extends BaseService{
             senha: usuario.senha,           
         }
 
-        this.baseURL = `${this.urlApi}/usuario/verificarusuario`
+        this.baseURL = `${this.urlApi}/usuario/login`
         return this.http.post<Usuario>(this.baseURL, body, { headers });
     }
 

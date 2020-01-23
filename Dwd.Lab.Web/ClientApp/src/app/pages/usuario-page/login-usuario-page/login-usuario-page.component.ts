@@ -4,23 +4,27 @@ import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { error } from 'util';
+import { FormComponent } from 'src/app/shared/form/form.component';
 
 @Component({
   selector: 'app-login-usuario-page',
   templateUrl: './login-usuario-page.component.html',
   styleUrls: ['./login-usuario-page.component.css'],
 })
-export class LoginUsuarioPageComponent implements OnInit {
+export class LoginUsuarioPageComponent extends FormComponent implements OnInit {
 
   public usuario;
   public returnUrl: string;
   public mensagem: string;
+  
+
 
 
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
     private usuarioService: UsuarioService) {
+      super();
   }
 
   ngOnInit() {
@@ -30,11 +34,13 @@ export class LoginUsuarioPageComponent implements OnInit {
 
   loginUsuario(): void {
 
-    this.usuarioService.verificarUsuario(this.usuario)
+    this.ativarSpinner = true;   
+
+    this.usuarioService.loginUser(this.usuario)
       .subscribe(
-        data => {
-          //Essa linha será executada no caso de retorno sem erro.       
-          this.usuarioService.login(this.usuario);
+        user => {
+          //Essa linha será executada no caso de retorno sem erro.              
+          this.usuarioService.login(user);
 
           if (this.returnUrl == undefined) {
             //Caso o usuário ir direto pelo login (para logar)
@@ -46,9 +52,11 @@ export class LoginUsuarioPageComponent implements OnInit {
 
         },
         err => {
-          this.mensagem = err.error;
+          this.mensagem = err.error;   
+          this.ativarSpinner = false;       
         }
       );
+      
   }
 
   cadastroUsuario():void{

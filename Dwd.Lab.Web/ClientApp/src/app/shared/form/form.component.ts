@@ -8,6 +8,8 @@ import * as $ from "jquery";
 })
 export class FormComponent implements OnInit {
 
+  protected ativarSpinner: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
