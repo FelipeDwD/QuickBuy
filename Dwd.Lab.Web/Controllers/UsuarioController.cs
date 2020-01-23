@@ -65,5 +65,19 @@ namespace Dwd.Lab.Web.Controllers
                 return BadRequest(ex.Message.ToString());
             }
         }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromBody] Usuario usuario)
+        {
+            try
+            {
+                this._usuarioRepositorio.Remover(usuario);
+                return BadRequest("Deletado");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
     }
 }

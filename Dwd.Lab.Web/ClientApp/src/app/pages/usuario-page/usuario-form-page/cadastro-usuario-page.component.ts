@@ -39,8 +39,12 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
     this.usuarioService.cadastrarNovoUsuario(this.usuario)
     .subscribe(
       ok => {
-      this.router.navigate(['/login-usuario']);
-      this.mostraDialogo(`Cadastro efetuado com sucesso`, `success`, 2000);
+      let logado = this.usuarioService.logado();
+      if(logado){
+        this.router.navigate(['/usuario-main']);
+      }else{
+        this.router.navigate(['/login-usuario']);
+      }      
     },
     err =>{
       this.ativarSpinner = false;

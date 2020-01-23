@@ -5,6 +5,7 @@
       <th scope="col">Nome</th>
       <th scope="col">Sobrenome</th>
       <th scope="col">E-mail</th>
+      <th scope="col" style="text-align: center;">Excluir</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
       <td> {{item.nome}} </td>
       <td> {{item.sobrenome}} </td>
       <td> {{item.email}} </td>
+      <td style="background-color:lightgrey; text-align: center;"> <button class="btn btn-danger" (click)="deleteUser(item)">Excluir</button></td>
     </tr>
   </tbody>
 
