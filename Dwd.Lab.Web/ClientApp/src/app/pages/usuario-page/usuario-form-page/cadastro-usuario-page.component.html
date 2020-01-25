@@ -8,10 +8,7 @@
       nome 
       #nome="ngModel"
       [ngClass]= "{'is-invalid': nome.touched && nome.invalid}" 
-      required/>
-      <div class="invalid-feedback" *ngIf="nome.touched && nome.errors.required">
-        <p>É obrigatório informar um nome.</p>
-      </div>
+      required/>      
     </div>
     <div class="col-md-6 mb-3">
       <label for="sobrenomeUsuario">*Sobrenome:</label>
@@ -21,10 +18,7 @@
       [(ngModel)]="usuario.sobrenome"
       sobrenome
       #sobrenome="ngModel"
-      [ngClass]="{'is-invalid': sobrenome.touched && sobrenome.invalid}"/>
-      <div class="invalid-feedback" *ngIf="sobrenome.touched && sobrenome.errors.required">
-        <p>É obrigatório informar um sobrenome.</p>
-      </div>
+      [ngClass]="{'is-invalid': sobrenome.touched && sobrenome.invalid}"/>      
     </div>
   </div>
   <div class="row">
@@ -37,10 +31,7 @@
       cpf
       #cpf="ngModel"
       [ngClass]="{'is-invalid': cpf.touched && cpf.invalid}"
-      />
-      <div class="invalid-feedback" *ngIf="cpf.touched && cpf.errors.required">
-        <p>É obrigatório informar um CPF.</p>
-      </div>
+      />      
     </div>
   </div>
   <div>
@@ -53,10 +44,7 @@
         [(ngModel)]="usuario.email"
         email
         #email="ngModel"
-        [ngClass]="{'is-invalid': email.touched && email.invalid}"/>
-        <div class="invalid-feedback" *ngIf="email.touched && email.errors.required">
-          <p>É obrigatório informar um e-mail.</p>
-        </div>
+        [ngClass]="{'is-invalid': email.touched && email.invalid}"/>        
       </div>
       <div class="col-md-6 mb-3">
         <label for="senhaUsuario">*Senha: </label>
@@ -66,12 +54,17 @@
         [(ngModel)]="usuario.senha"
         senha
         #senha="ngModel"
-        [ngClass]="{'is-invalid': senha.touched && senha.invalid}"/>
-        <div class="invalid-feedback" *ngIf="senha.touched && senha.errors.required"> 
-          <p>É obrigatório informar uma senha.</p>
-        </div>
+        [ngClass]="{'is-invalid': senha.touched && senha.invalid}"/>        
       </div>
     </div>    
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile04" (change)="inputChange($event.target.files)" placeholder="Perfil">
+          <label class="custom-file-label" for="inputGroupFile04"> Selecione sua imagem de perfil </label>
+        </div>        
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-6 mb-3">
         <button class="btn btn-secondary btn-block" (click)="back()">Voltar</button>
