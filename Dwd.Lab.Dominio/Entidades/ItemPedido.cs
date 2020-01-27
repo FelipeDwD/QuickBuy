@@ -1,4 +1,6 @@
-﻿namespace Dwd.Lab.Dominio.Entidades
+﻿using System;
+
+namespace Dwd.Lab.Dominio.Entidades
 {
     public class ItemPedido 
     {

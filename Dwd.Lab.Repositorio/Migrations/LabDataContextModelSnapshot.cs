@@ -53,24 +53,23 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.ToTable("Endereco");
                 });
 
-            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Imagem", b =>
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(60);
 
+                    b.Property<int>("ProdutoId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ImagemProduto");
+                    b.HasIndex("ProdutoId");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Imagem");
+                    b.ToTable("ImagemProduto");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemUsuario", b =>
@@ -174,7 +173,7 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(25);
 
-                    b.Property<int?>("ImagemId");
+                    b.Property<int?>("ImagemUsuarioId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -190,7 +189,7 @@ namespace Dwd.Lab.Repositorio.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImagemId");
+                    b.HasIndex("ImagemUsuarioId");
 
                     b.ToTable("Usuario");
                 });
@@ -218,13 +217,10 @@ namespace Dwd.Lab.Repositorio.Migrations
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
                 {
-                    b.HasBaseType("Dwd.Lab.Dominio.Entidades.Imagem");
-
-                    b.Property<int?>("ProdutoId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.HasDiscriminator().HasValue("ImagemProduto");
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Produto", "Produto")
+                        .WithMany("ImagemProduto")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ItemPedido", b =>
@@ -255,16 +251,9 @@ namespace Dwd.Lab.Repositorio.Migrations
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Usuario", b =>
                 {
-                    b.HasOne("Dwd.Lab.Dominio.Entidades.ImagemUsuario", "Imagem")
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.ImagemUsuario", "ImagemUsuario")
                         .WithMany()
-                        .HasForeignKey("ImagemId");
-                });
-
-            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
-                {
-                    b.HasOne("Dwd.Lab.Dominio.Entidades.Produto")
-                        .WithMany("Imagens")
-                        .HasForeignKey("ProdutoId");
+                        .HasForeignKey("ImagemUsuarioId");
                 });
 #pragma warning restore 612, 618
         }

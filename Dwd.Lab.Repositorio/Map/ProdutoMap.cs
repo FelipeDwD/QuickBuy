@@ -28,7 +28,8 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasMaxLength(12);
 
             builder
-                .HasMany(p => p.Imagens);
+                 .HasMany(p => p.ImagemProduto)
+                 .WithOne(i => i.Produto);
 
             builder.ToTable("Produto");
         }

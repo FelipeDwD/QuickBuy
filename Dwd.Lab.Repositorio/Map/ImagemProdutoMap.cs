@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Dwd.Lab.Repositorio.Map
 {
-    public class ImagemProdutoMap : IEntityTypeConfiguration<Imagem>
+    public class ImagemProdutoMap : IEntityTypeConfiguration<ImagemProduto>
     {
-        public void Configure(EntityTypeBuilder<Imagem> builder)
+        public void Configure(EntityTypeBuilder<ImagemProduto> builder)
         {
             builder.HasKey(i => i.Id);
 
@@ -17,6 +17,11 @@ namespace Dwd.Lab.Repositorio.Map
                 .Property(i => i.Nome)
                 .IsRequired()
                 .HasMaxLength(60);
+
+            builder
+                .HasOne(i => i.Produto)
+                .WithMany(p => p.ImagemProduto)
+                .HasForeignKey(i => i.ProdutoId);
 
             builder.ToTable("ImagemProduto");
         }

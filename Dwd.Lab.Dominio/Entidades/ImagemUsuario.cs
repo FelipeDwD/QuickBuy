@@ -5,6 +5,7 @@ using System.Text;
 namespace Dwd.Lab.Dominio.Entidades
 {
     public class ImagemUsuario : Imagem
-    {        
+    {
+       
     }
 }

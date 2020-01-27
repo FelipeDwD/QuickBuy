@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
-    public partial class Primeiro : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,12 +32,25 @@ namespace Dwd.Lab.Repositorio.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(maxLength: 10, nullable: false),
-                    Descricao = table.Column<string>(maxLength: 30, nullable: false)
+                    Nome = table.Column<string>(type: "varchar", maxLength: 30, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FormaPagamento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImagemUsuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagemUsuario", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,12 +76,40 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(maxLength: 10, nullable: false),
                     Sobrenome = table.Column<string>(maxLength: 10, nullable: false),
+                    Cpf = table.Column<string>(maxLength: 15, nullable: false),
                     Email = table.Column<string>(maxLength: 25, nullable: false),
-                    Senha = table.Column<string>(maxLength: 400, nullable: false)
+                    Senha = table.Column<string>(maxLength: 400, nullable: false),
+                    ImagemUsuarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Usuario_ImagemUsuario_ImagemUsuarioId",
+                        column: x => x.ImagemUsuarioId,
+                        principalTable: "ImagemUsuario",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImagemProduto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(maxLength: 60, nullable: false),
+                    ProdutoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagemProduto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImagemProduto_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +169,11 @@ namespace Dwd.Lab.Repositorio.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ImagemProduto_ProdutoId",
+                table: "ImagemProduto",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ItemPedido_PedidoId",
                 table: "ItemPedido",
                 column: "PedidoId");
@@ -146,10 +192,18 @@ namespace Dwd.Lab.Repositorio.Migrations
                 name: "IX_Pedido_UsuarioId",
                 table: "Pedido",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuario_ImagemUsuarioId",
+                table: "Usuario",
+                column: "ImagemUsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ImagemProduto");
+
             migrationBuilder.DropTable(
                 name: "ItemPedido");
 
@@ -167,6 +221,9 @@ namespace Dwd.Lab.Repositorio.Migrations
 
             migrationBuilder.DropTable(
                 name: "Usuario");
+
+            migrationBuilder.DropTable(
+                name: "ImagemUsuario");
         }
     }
 }

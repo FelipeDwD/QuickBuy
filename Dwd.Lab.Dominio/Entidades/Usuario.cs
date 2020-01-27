@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Dwd.Lab.Dominio.Entidades
 {
@@ -14,8 +15,9 @@ namespace Dwd.Lab.Dominio.Entidades
         /// <summary>
         /// Um usuário pode ter nenhum ou muitos pedidos
         /// </summary>
-        public virtual ICollection<Pedido> Pedidos { get; set; }
+        public virtual ICollection<Pedido> Pedidos { get; set; }       
 
-        public virtual ImagemUsuario Imagem { get; set; }
+        public virtual ImagemUsuario ImagemUsuario { get; set; }
+
     }
 }
