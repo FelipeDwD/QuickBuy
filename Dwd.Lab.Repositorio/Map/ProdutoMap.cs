@@ -27,6 +27,9 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(12);
 
+            builder
+                .HasMany(p => p.Imagens);
+
             builder.ToTable("Produto");
         }
     }

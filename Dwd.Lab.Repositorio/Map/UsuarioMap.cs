@@ -37,6 +37,9 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(15);
 
+            builder
+                .HasOne(u => u.Imagem);
+
             builder.ToTable("Usuario");
 
         }

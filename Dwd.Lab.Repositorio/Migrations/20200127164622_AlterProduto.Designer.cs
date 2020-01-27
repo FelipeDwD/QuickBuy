@@ -4,14 +4,16 @@ using Dwd.Lab.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
     [DbContext(typeof(LabDataContext))]
-    partial class LabDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200127164622_AlterProduto")]
+    partial class AlterProduto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,33 +61,17 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(60);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ImagemProduto");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Imagem");
-                });
-
-            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemUsuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int?>("ProdutoId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ImagemUsuario");
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("Imagem");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ItemPedido", b =>
@@ -216,15 +202,11 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.ToTable("FormaPagamento");
                 });
 
-            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Imagem", b =>
                 {
-                    b.HasBaseType("Dwd.Lab.Dominio.Entidades.Imagem");
-
-                    b.Property<int?>("ProdutoId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.HasDiscriminator().HasValue("ImagemProduto");
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Produto")
+                        .WithMany("Imagens")
+                        .HasForeignKey("ProdutoId");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ItemPedido", b =>
@@ -255,16 +237,9 @@ namespace Dwd.Lab.Repositorio.Migrations
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Usuario", b =>
                 {
-                    b.HasOne("Dwd.Lab.Dominio.Entidades.ImagemUsuario", "Imagem")
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Imagem", "Imagem")
                         .WithMany()
                         .HasForeignKey("ImagemId");
-                });
-
-            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
-                {
-                    b.HasOne("Dwd.Lab.Dominio.Entidades.Produto")
-                        .WithMany("Imagens")
-                        .HasForeignKey("ProdutoId");
                 });
 #pragma warning restore 612, 618
         }

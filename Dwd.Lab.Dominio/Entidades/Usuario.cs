@@ -2,7 +2,7 @@
 
 namespace Dwd.Lab.Dominio.Entidades
 {
-    public class Usuario
+    public class Usuario 
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -15,5 +15,7 @@ namespace Dwd.Lab.Dominio.Entidades
         /// Um usuário pode ter nenhum ou muitos pedidos
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
+
+        public virtual ImagemUsuario Imagem { get; set; }
     }
 }
