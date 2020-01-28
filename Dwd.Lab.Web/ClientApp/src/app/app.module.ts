@@ -18,7 +18,7 @@ import { GridComponent } from './shared/grid/grid.component';
 import { ProdutoGridPageComponent } from './pages/produto-page/produto-grid-page/produto-grid-page.component';
 import { ProdutoFormPageComponent } from './pages/produto-page/produto-form-page/produto-form-page.component';
 import { ProdutoMainPageComponent } from './pages/produto-page/produto-main-page/produto-main-page.component';
-import { ImagemService } from './services/imagem/imagem.service';
+import { ImagemUsuarioService } from './services/imagem/imagemUsuario.service';
 
 
 @NgModule({
@@ -52,7 +52,7 @@ import { ImagemService } from './services/imagem/imagem.service';
     ])
   ],
   providers: [UsuarioService,
-              ImagemService],
+              ImagemUsuarioService],
               
   bootstrap: [AppComponent]
 })

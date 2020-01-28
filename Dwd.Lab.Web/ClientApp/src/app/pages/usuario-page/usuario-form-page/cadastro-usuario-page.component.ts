@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/Models/usuario';
 import { FormComponent } from 'src/app/shared/form/form.component';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
-import { ImagemService } from 'src/app/services/imagem/imagem.service';
+import { ImagemUsuarioService } from 'src/app/services/imagem/imagemUsuario.service';
 
 @Component({
   selector: 'app-cadastro-usuario-page',
@@ -20,7 +20,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
-    private imagemService: ImagemService) {
+    private imagemService: ImagemUsuarioService) {
     super();
   }
 
@@ -74,7 +74,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
           .subscribe(
             ok => {}
           );
-          
+
         });
   }
 

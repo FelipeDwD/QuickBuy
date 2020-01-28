@@ -9,7 +9,7 @@ import { ImagemUsuario } from "src/app/Models/imagemUsuario";
     providedIn: "root"
 })
 
-export class ImagemService extends BaseService{
+export class ImagemUsuarioService extends BaseService{
     private baseURL: string;
 
     
