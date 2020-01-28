@@ -14,17 +14,13 @@ namespace Dwd.Lab.Web.Controllers
     [Route("api/[Controller]")]
     public class ImagemUsuarioController : Controller
     {
-        private readonly IImagemUsuarioRepositorio _imagemUsuarioRepositorio;       
-        private IHttpContextAccessor _httpContextAccessor;
-        private IHostingEnvironment _hostingEnvironment;
+        private readonly IImagemUsuarioRepositorio _imagemUsuarioRepositorio;     
         private readonly IImagem _imagem;
 
         public ImagemUsuarioController(IImagemUsuarioRepositorio imagemUsuarioRepositorio, IHttpContextAccessor httpContextAccessor,
             IHostingEnvironment hostingEnvironment, IImagem imagem)
         {
-            this._imagemUsuarioRepositorio = imagemUsuarioRepositorio;
-            this._httpContextAccessor = httpContextAccessor;
-            this._hostingEnvironment = hostingEnvironment;
+            this._imagemUsuarioRepositorio = imagemUsuarioRepositorio;            
             this._imagem = imagem;
         }
 

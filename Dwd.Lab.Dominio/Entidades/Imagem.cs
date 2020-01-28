@@ -24,6 +24,9 @@ namespace Dwd.Lab.Dominio.Entidades
 
         public string EnviarParaServidor()
         {
+            //Guarda a data atual com horas, minutos e segundos. Formato: YYYYmmddhhmmss
+            string now = DateTime.Now.ToString("yyyyMMddHHmmss");
+
             //Arquivo recebido como um todo
             var formFile = this._httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];
 
@@ -34,10 +37,10 @@ namespace Dwd.Lab.Dominio.Entidades
             var extensao = nomeArquivo.Split(".").Last();
 
             //Guarda os primeiros 10 caracteres que está em "nome"
-            var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();
+            var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(5).ToArray();
 
             //Guarda os primeiros caracteres do arquivo trocando ""(espaço) por "-"(traço), adiciona ".(extensao)".
-            var novoNomeArquivo = new String(arrayNomeCompacto).Replace(" ", "-") + "." + extensao;
+            var novoNomeArquivo = new String(arrayNomeCompacto).Replace(" ", "-") + now  + "." + extensao;
 
             //Endereço da pasta onde irá ser criado o arquivo no servidor
             var pastaArquivos = this._hostingEnvironment.WebRootPath + @"\arquivos\";
