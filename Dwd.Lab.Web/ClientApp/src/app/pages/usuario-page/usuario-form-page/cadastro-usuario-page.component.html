@@ -44,7 +44,10 @@
         [(ngModel)]="usuario.email"
         email
         #email="ngModel"
-        [ngClass]="{'is-invalid': email.touched && email.invalid}"/>        
+        [ngClass]="{'is-invalid': email.touched && email.invalid}"/>     
+        <div style="color: crimson;" *ngIf="mensagemValidacao">
+          {{ mensagemValidacao }}
+        </div> 
       </div>
       <div class="col-md-6 mb-3">
         <label for="senhaUsuario">*Senha: </label>

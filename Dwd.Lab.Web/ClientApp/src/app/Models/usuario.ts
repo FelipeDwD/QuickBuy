@@ -1,3 +1,5 @@
+import { ImagemUsuario } from "./imagemUsuario";
+
 export class Usuario {
     id: number;
     nome: string;
@@ -5,5 +7,5 @@ export class Usuario {
     cpf: string;
     email: string;
     senha: string;
-    imagemId: number;
+    imagemUsuario: ImagemUsuario;
 }

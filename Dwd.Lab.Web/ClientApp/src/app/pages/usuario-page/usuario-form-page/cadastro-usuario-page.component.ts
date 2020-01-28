@@ -17,6 +17,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected usuario: Usuario;
   protected produto: any;
   protected arquivoSelecionado: File;
+  protected mensagemValidacao: string;
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
@@ -56,6 +57,9 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
           } else {
             this.router.navigate(['/login-usuario']);
           }
+        },
+        err => {
+          this.mensagemValidacao = err.error;          
         });
 
     this.ativarSpinner = false;

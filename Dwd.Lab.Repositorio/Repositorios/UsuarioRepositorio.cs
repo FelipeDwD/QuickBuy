@@ -18,5 +18,15 @@ namespace Dwd.Lab.Repositorio.Repositorios
                 .Usuario
                 .FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
+
+        public bool VerificarEmail(string email)
+        {
+            var existe = LabDataContext.Usuario.FirstOrDefault(u => u.Email == email);
+
+            if (existe != null)
+                return true;
+
+            return false;
+        }
     }
 }
