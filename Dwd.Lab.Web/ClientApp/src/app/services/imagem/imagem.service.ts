@@ -17,11 +17,11 @@ export class ImagemService extends BaseService{
         super();            
     }
 
-    public enviarArquivo(arquivoSelecionado: File):Observable<JSON>{
+    public enviarArquivo(arquivoSelecionado: File):Observable<ImagemUsuario>{
         const formData: FormData = new FormData();
         formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
         this.baseURL = `${this.urlApi}/imagemusuario/enviararquivo`;
-        return this.http.post<JSON>(this.baseURL, formData);
+        return this.http.post<ImagemUsuario>(this.baseURL, formData);
     }
 
     public salvarImagem(imagemUsuario: ImagemUsuario): Observable<ImagemUsuario>{

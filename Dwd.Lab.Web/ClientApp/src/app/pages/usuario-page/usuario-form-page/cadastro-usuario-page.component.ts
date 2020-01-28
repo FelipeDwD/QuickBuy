@@ -68,7 +68,14 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   enviarImagemServidor(): void {
     this.imagemService.enviarArquivo(this.arquivoSelecionado)
       .subscribe(
-        ok => { });
+        ok => {           
+
+          this.imagemService.salvarImagem(ok)
+          .subscribe(
+            ok => {}
+          );
+          
+        });
   }
 
 

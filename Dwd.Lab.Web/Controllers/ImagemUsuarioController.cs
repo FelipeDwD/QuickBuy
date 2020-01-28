@@ -30,7 +30,7 @@ namespace Dwd.Lab.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult Post(ImagemUsuario imagemUsuario)
+        public IActionResult Post([FromBody] ImagemUsuario imagemUsuario)
         {
             try
             {               
@@ -54,15 +54,9 @@ namespace Dwd.Lab.Web.Controllers
                 var imagem = this._imagem.EnviarParaServidor();
 
                 ImagemUsuario imagemUsuario = new ImagemUsuario();
-
                 imagemUsuario.Nome = imagem;
-               
-                
 
-                this.Post(imagemUsuario);
-
-
-                return Json(imagem);              
+                return Created("api/imagemusuario", imagemUsuario);            
             }
             catch (Exception ex)
             {
