@@ -19,6 +19,16 @@ namespace Dwd.Lab.Repositorio.Repositorios
                 .FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
 
+        public bool VerificarCpf(string cpf)
+        {
+            var existe = LabDataContext.Usuario.FirstOrDefault(u => u.Cpf == cpf);
+
+            if (existe != null)
+                return true;
+
+            return false;
+        }
+
         public bool VerificarEmail(string email)
         {
             var existe = LabDataContext.Usuario.FirstOrDefault(u => u.Email == email);

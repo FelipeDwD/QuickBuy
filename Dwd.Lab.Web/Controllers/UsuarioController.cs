@@ -59,16 +59,26 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                var verificar = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+                var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+                var verificarCpf = this._usuarioRepositorio.VerificarCpf(usuario.Cpf);
 
-                if (!verificar)
+                if (!verificarEmail)
                 {
-                    this._usuarioRepositorio.Adicionar(usuario);
-                    return Created("api/usuario", usuario);
+                    if (!verificarCpf)
+                    {
+                        this._usuarioRepositorio.Adicionar(usuario);
+                        return Created("api/usuario", usuario);
+                    }
+                    else
+                    {
+                        return BadRequest("Já temos um usuário com esse CPF.");   
+                    }                    
                 }
-                
-                return BadRequest("Já temos um usuário com esse e-mail");
-                                  
+                else
+                {
+                    return BadRequest("Já temos um usuário com esse e-mail");
+                }               
+
             }
             catch (Exception ex)
             {

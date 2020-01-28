@@ -8,5 +8,7 @@ namespace Dwd.Lab.Dominio.Contratos
     {
         Usuario GetByCredenciais(string email, string senha);
         bool VerificarEmail(string email);
+
+        bool VerificarCpf(string cpf);
     }
 }
