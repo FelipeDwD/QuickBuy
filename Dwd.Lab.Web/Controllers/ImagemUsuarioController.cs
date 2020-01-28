@@ -29,17 +29,30 @@ namespace Dwd.Lab.Web.Controllers
         public IActionResult Post([FromBody] ImagemUsuario imagemUsuario)
         {
             try
+            {               
+               
+                this._imagemUsuarioRepositorio.Adicionar(imagemUsuario);
+
+                return Created("api/imagemusuario", imagemUsuario);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpPost("enviararquivo")]
+        public IActionResult EnviarArquivo()
+        {
+            try
             {
                 //Envia imagem para o servidor e retorna o novo nome dela
                 var imagem = this._imagem.EnviarParaServidor();
 
-                //Atualizando o nome da imagem antes de salvar no banco
-                imagemUsuario.Nome = imagem;
-
-                //Armazena o id e o novo nome da imagem no banco de dados
-                this._imagemUsuarioRepositorio.Adicionar(imagemUsuario);
-
                 return Json(imagem);
+                
+
 
             }
             catch (Exception ex)

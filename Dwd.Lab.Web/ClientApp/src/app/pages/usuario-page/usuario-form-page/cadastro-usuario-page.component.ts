@@ -62,7 +62,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   inputChange(file: FileList): void {
-    this.arquivoSelecionado = file[0];
+    this.arquivoSelecionado = file[0];    
   }
 
   enviarImagemServidor(): void {
