@@ -14,24 +14,27 @@ namespace Dwd.Lab.Web.Controllers
     [Route("api/[Controller]")]
     public class ImagemUsuarioController : Controller
     {
-        private readonly IImagemUsuarioRepositorio _imagemUsuarioRepositorio;
+        private readonly IImagemUsuarioRepositorio _imagemUsuarioRepositorio;       
+        private IHttpContextAccessor _httpContextAccessor;
+        private IHostingEnvironment _hostingEnvironment;
         private readonly IImagem _imagem;
 
-        public ImagemUsuarioController(IImagemUsuarioRepositorio imagemUsuarioRepositorio,
-            IImagem imagem)
+        public ImagemUsuarioController(IImagemUsuarioRepositorio imagemUsuarioRepositorio, IHttpContextAccessor httpContextAccessor,
+            IHostingEnvironment hostingEnvironment, IImagem imagem)
         {
             this._imagemUsuarioRepositorio = imagemUsuarioRepositorio;
+            this._httpContextAccessor = httpContextAccessor;
+            this._hostingEnvironment = hostingEnvironment;
             this._imagem = imagem;
         }
 
 
         [HttpPost]
-        public IActionResult Post([FromBody] ImagemUsuario imagemUsuario)
+        public IActionResult Post(ImagemUsuario imagemUsuario)
         {
             try
             {               
-               
-                this._imagemUsuarioRepositorio.Adicionar(imagemUsuario);
+               this._imagemUsuarioRepositorio.Adicionar(imagemUsuario);
 
                 return Created("api/imagemusuario", imagemUsuario);
 
@@ -50,10 +53,16 @@ namespace Dwd.Lab.Web.Controllers
                 //Envia imagem para o servidor e retorna o novo nome dela
                 var imagem = this._imagem.EnviarParaServidor();
 
-                return Json(imagem);
+                ImagemUsuario imagemUsuario = new ImagemUsuario();
+
+                imagemUsuario.Nome = imagem;
+               
                 
 
+                this.Post(imagemUsuario);
 
+
+                return Json(imagem);              
             }
             catch (Exception ex)
             {

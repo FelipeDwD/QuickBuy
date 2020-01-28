@@ -12,9 +12,15 @@ namespace Dwd.Lab.Dominio.Entidades
         public int Id { get; set; }
         public string Nome { get; set; }
 
-        private IHostingEnvironment _hostingEnvironment;
+        protected IHostingEnvironment _hostingEnvironment;
 
-        private IHttpContextAccessor _httpContextAccessor;
+        protected IHttpContextAccessor _httpContextAccessor;
+
+        public Imagem(IHostingEnvironment hostingEnvironment, IHttpContextAccessor httpContextAccessor)
+        {
+            this._hostingEnvironment = hostingEnvironment;
+            this._httpContextAccessor = httpContextAccessor;
+        }
 
         public string EnviarParaServidor()
         {

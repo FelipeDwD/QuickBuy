@@ -8,5 +8,10 @@ namespace Dwd.Lab.Dominio.Entidades
     {
         public int ProdutoId { get; set; }
         public virtual Produto Produto { get; set; }
+
+        public ImagemProduto() : base (null, null)
+        {
+
+        }
     }
 }
