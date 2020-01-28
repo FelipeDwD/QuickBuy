@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/Models/usuario';
 import { FormComponent } from 'src/app/shared/form/form.component';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
+import { ImagemService } from 'src/app/services/imagem/imagem.service';
 
 @Component({
   selector: 'app-cadastro-usuario-page',
@@ -13,62 +14,62 @@ import { ProdutoService } from 'src/app/services/produto/produto.service';
 export class CadastroUsuarioPageComponent extends FormComponent implements OnInit {
 
   private paginaAnterior: any;
-  protected usuario: any;
+  protected usuario: Usuario;
   protected produto: any;
   protected arquivoSelecionado: File;
 
-  constructor(private router: Router, 
-    private usuarioService: UsuarioService) {
-      super();
-     }
+  constructor(private router: Router,
+    private usuarioService: UsuarioService,
+    private imagemService: ImagemService) {
+    super();
+  }
 
   ngOnInit() {
-    this.usuario = new Usuario();    
-  }  
+    this.usuario = new Usuario();
+  }
 
-  back(): void{
+  back(): void {
     let logado = this.usuarioService.logado();
     this.paginaAnterior = history.back();
 
-    if(logado){
+    if (logado) {
       this.router.navigate([this.paginaAnterior]);
-    }else{
+    } else {
       this.router.navigate(['/login-usuario']);
     }
   }
 
-  cadastrarUsuario():void{
+  cadastrarUsuario(): void {
     this.ativarSpinner = true;
-    this.usuarioService.cadastrarNovoUsuario(this.usuario)
-    .subscribe(
-      ok => {
-      let logado = this.usuarioService.logado();
 
-      this.usuarioService.enviarArquivo(this.arquivoSelecionado)
+    if (this.arquivoSelecionado != null) {
+      this.enviarImagemServidor();
+    }
+
+    this.usuarioService.cadastrarNovoUsuario(this.usuario)
       .subscribe(
         ok => {
+          let logado = this.usuarioService.logado();
 
-        },
-        err =>{
+          if (logado) {
+            this.router.navigate(['/usuario-main']);
+          } else {
+            this.router.navigate(['/login-usuario']);
+          }
+        });
 
-        }
-      );
+    this.ativarSpinner = false;
+  }
 
-      if(logado){
-        this.router.navigate(['/usuario-main']);
-      }else{
-        this.router.navigate(['/login-usuario']);
-      }      
-    },
-    err =>{
-      this.ativarSpinner = false;
-    });
-      
-    }
+  inputChange(file: FileList): void {
+    this.arquivoSelecionado = file[0];
+  }
 
-    inputChange(file: FileList):void{
-      this.arquivoSelecionado = file[0];      
-    }
-  
+  enviarImagemServidor(): void {
+    this.imagemService.enviarArquivo(this.arquivoSelecionado)
+      .subscribe(
+        ok => { });
+  }
+
 
 }

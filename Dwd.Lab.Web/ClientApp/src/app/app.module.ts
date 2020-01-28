@@ -18,6 +18,7 @@ import { GridComponent } from './shared/grid/grid.component';
 import { ProdutoGridPageComponent } from './pages/produto-page/produto-grid-page/produto-grid-page.component';
 import { ProdutoFormPageComponent } from './pages/produto-page/produto-form-page/produto-form-page.component';
 import { ProdutoMainPageComponent } from './pages/produto-page/produto-main-page/produto-main-page.component';
+import { ImagemService } from './services/imagem/imagem.service';
 
 
 @NgModule({
@@ -50,7 +51,9 @@ import { ProdutoMainPageComponent } from './pages/produto-page/produto-main-page
       { path: 'usuario-grid', component: UsuarioGridPageComponent, canActivate: [GuardaRotas]}
     ])
   ],
-  providers: [UsuarioService],
+  providers: [UsuarioService,
+              ImagemService],
+              
   bootstrap: [AppComponent]
 })
 export class AppModule { }

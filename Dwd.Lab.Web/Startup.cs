@@ -1,4 +1,5 @@
 using Dwd.Lab.Dominio.Contratos;
+using Dwd.Lab.Dominio.Entidades;
 using Dwd.Lab.Repositorio.Contexto;
 using Dwd.Lab.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
@@ -58,6 +59,8 @@ namespace Dwd.Lab.Web
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IFormaPagamentoRepositorio, FormaPagamentoRepositorio>();
             services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
+            services.AddScoped<IImagemUsuarioRepositorio, ImagemUsuarioRepositorio>();
+            services.AddScoped<IImagem, Imagem>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

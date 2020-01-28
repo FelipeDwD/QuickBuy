@@ -96,13 +96,6 @@ export class UsuarioService extends BaseService{
 
         this.baseURL = `${this.urlApi}/usuario/delete`
         return this.http.post<Usuario>(this.baseURL, body, {headers});
-    }
-
-    public enviarArquivo(arquivoSelecionado: File):Observable<boolean>{
-        const formData: FormData = new FormData();
-        formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
-        this.baseURL = `${this.urlApi}/usuario/enviarArquivo`;
-        return this.http.post<boolean>(this.baseURL, formData);
-    }
+    }  
 
 }
