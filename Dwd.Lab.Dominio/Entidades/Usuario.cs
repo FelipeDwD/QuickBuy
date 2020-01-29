@@ -17,7 +17,11 @@ namespace Dwd.Lab.Dominio.Entidades
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
 
+        public DateTime DataCadastro { get; set; }
         public string Imagem { get; set; }
+        public string  Sexo { get; set; }
+
+
 
 
     }

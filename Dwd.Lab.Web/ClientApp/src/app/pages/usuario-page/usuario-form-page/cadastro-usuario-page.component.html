@@ -32,11 +32,30 @@
       #cpf="ngModel"
       [ngClass]="{'is-invalid': cpf.touched && cpf.invalid}"
       />      
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-12 mb-3">
+        *Sexo:
     </div>
+  </div>
+  <div class="row">         
+      <div class="col-md-3 col-12 mb-3">        
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline1">Masculino</label>
+        </div>
+      </div>
+      <div class="col-md-3 col-12 mb-3">        
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline2">Feminino</label>
+        </div>
+      </div>           
   </div>
   <div>
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 col-12 mb-3">
         <label for="emailUsuario">*E-mail:</label>
         <input class="form-control" type="text" name="emailUsuario" id="emailUsuario" 
         placeholder="Informe seu e-mail" 
@@ -45,6 +64,17 @@
         email
         #email="ngModel"
         [ngClass]="{'is-invalid': email.touched && email.invalid}"/>             
+      </div>
+      <div class="col-md-6 col-12 mb-3">
+        <label for="confirmarEmail">*E-mail confirmação:</label>
+        <input class="form-control" type="email" name="confirmarEmail" id="confirmarEmail"
+        placeholder="Confirme seu e-mail"
+        required
+        [(ngModel)]="emailConfirmado"
+        emailc
+        #emailc="ngModel"        
+        email
+        [ngClass]="{'is-invalid': emailc.touched && emailc.invalid}"/>        
       </div>
       <div class="col-md-6 mb-3">
         <label for="senhaUsuario">*Senha: </label>
@@ -64,7 +94,8 @@
           <label class="custom-file-label" for="inputGroupFile04"> Selecione sua imagem de perfil </label>
         </div>        
       </div>
-    </div>
+    </div>   
+
     <div class="row">
       <div class="col-md-6 mb-3"></div>
       <div class="col-md-6 mb-3">

@@ -4,14 +4,16 @@ using Dwd.Lab.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
     [DbContext(typeof(LabDataContext))]
-    partial class LabDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200129181912_AlterUser2")]
+    partial class AlterUser2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,10 +173,6 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasMaxLength(400);
-
-                    b.Property<string>("Sexo")
-                        .IsRequired()
-                        .HasMaxLength(1);
 
                     b.Property<string>("Sobrenome")
                         .IsRequired()

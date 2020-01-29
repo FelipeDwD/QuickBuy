@@ -38,7 +38,18 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasMaxLength(15);
 
             builder
-                .Property(u => u.Imagem);
+                .Property(u => u.DataCadastro)
+                .IsRequired();
+
+            builder
+                .Property(u => u.Imagem)
+                .IsRequired()
+                .HasMaxLength(70);
+
+            builder
+                .Property(u => u.Sexo)
+                .IsRequired()
+                .HasMaxLength(1);
 
 
             builder.ToTable("Usuario");

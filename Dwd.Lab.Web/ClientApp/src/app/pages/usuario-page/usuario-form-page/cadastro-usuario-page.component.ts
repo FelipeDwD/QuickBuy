@@ -16,6 +16,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   private paginaAnterior: any;
   protected usuario: Usuario;
   protected arquivoSelecionado: File;
+  protected emailConfirmado: string;
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
