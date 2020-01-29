@@ -9,7 +9,7 @@ import { ImagemUsuario } from "src/app/Models/imagemUsuario";
     providedIn: "root"
 })
 
-export class ImagemUsuarioService extends BaseService{
+export class ImagemService extends BaseService{
     private baseURL: string;
 
     
@@ -17,25 +17,11 @@ export class ImagemUsuarioService extends BaseService{
         super();            
     }
 
-    public enviarArquivo(arquivoSelecionado: File):Observable<ImagemUsuario>{
+    public enviarArquivo(arquivoSelecionado: File):Observable<string>{
         const formData: FormData = new FormData();
         formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
-        this.baseURL = `${this.urlApi}/imagemusuario/enviararquivo`;
-        return this.http.post<ImagemUsuario>(this.baseURL, formData);
-    }
-
-    public salvarImagem(imagemUsuario: ImagemUsuario): Observable<ImagemUsuario>{
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            nome: imagemUsuario.nome
-        }
-
-        this.baseURL = `${this.urlApi}/imagemusuario`;
-        return this.http.post<ImagemUsuario>(this.baseURL, body, {headers});
-    }
-
-
-
+        this.baseURL = `${this.urlApi}/imagem`;
+        return this.http.post<string>(this.baseURL, formData);
+    }   
 
 }

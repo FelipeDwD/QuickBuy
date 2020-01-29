@@ -53,13 +53,12 @@ namespace Dwd.Lab.Web
 
             //Todo código que tiver no construtor a interface IXRepositorio,
             //automaticamente receberá uma instância de XRepositorio,
-            //conforme abaixo:
+            //conforme abaixo (instância única do runtime):
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IFormaPagamentoRepositorio, FormaPagamentoRepositorio>();
-            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
-            services.AddScoped<IImagemUsuarioRepositorio, ImagemUsuarioRepositorio>();
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();            
             services.AddScoped<IImagem, Imagem>();
 
             // In production, the Angular files will be served from this directory

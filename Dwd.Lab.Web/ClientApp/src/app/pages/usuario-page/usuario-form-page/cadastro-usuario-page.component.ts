@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/Models/usuario';
 import { FormComponent } from 'src/app/shared/form/form.component';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
-import { ImagemUsuarioService } from 'src/app/services/imagem/imagemUsuario.service';
+import { ImagemService } from 'src/app/services/imagem/imagemUsuario.service';
 
 @Component({
   selector: 'app-cadastro-usuario-page',
@@ -15,12 +15,11 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
 
   private paginaAnterior: any;
   protected usuario: Usuario;
-  protected produto: any;
-  protected arquivoSelecionado: File;  
+  protected arquivoSelecionado: File;
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
-    private imagemService: ImagemUsuarioService) {
+    private imagemService: ImagemService) {
     super();
   }
 
@@ -39,13 +38,31 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
     }
   }
 
-  cadastrarUsuario(): void {
+  save(): void {
     this.ativarSpinner = true;
 
-    if (this.arquivoSelecionado != null) {
-      this.enviarImagemServidor();
+    if(this.arquivoSelecionado != null){
+      this.cadastroImagem();
+    }else{
+      this.cadastrarSimples();
     }
+    this.ativarSpinner = false;
+  }
 
+  inputChange(file: FileList): void {
+    this.arquivoSelecionado = file[0];
+  }
+
+  cadastroImagem(): void {
+    this.imagemService.enviarArquivo(this.arquivoSelecionado)
+      .subscribe(
+        image => {
+          this.usuario.imagem = image;
+          this.cadastrarSimples();
+        });
+  }
+
+  cadastrarSimples(): void {
     this.usuarioService.cadastrarNovoUsuario(this.usuario)
       .subscribe(
         ok => {
@@ -58,28 +75,10 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
           }
         },
         err => {
-          this.mensagemValidacao = err.error;          
-        });
-
-    this.ativarSpinner = false;
-  }
-
-  inputChange(file: FileList): void {
-    this.arquivoSelecionado = file[0];    
-  }
-
-  enviarImagemServidor(): void {
-    this.imagemService.enviarArquivo(this.arquivoSelecionado)
-      .subscribe(
-        ok => {           
-
-          this.imagemService.salvarImagem(ok)
-          .subscribe(
-            ok => {}
-          );
-
+          this.mensagemValidacao = err.error;
         });
   }
+
 
 
 }

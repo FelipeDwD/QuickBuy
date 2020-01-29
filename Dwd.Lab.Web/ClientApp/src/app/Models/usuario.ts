@@ -7,5 +7,5 @@ export class Usuario {
     cpf: string;
     email: string;
     senha: string;
-    imagemUsuario: ImagemUsuario;
+    imagem: string;
 }

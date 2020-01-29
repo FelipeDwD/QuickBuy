@@ -72,7 +72,8 @@ export class UsuarioService extends BaseService{
             sobrenome: usuario.sobrenome,
             cpf: usuario.cpf,
             email: usuario.email,
-            senha: usuario.senha
+            senha: usuario.senha,
+            imagem: usuario.imagem
         }
 
         this.baseURL = `${this.urlApi}/usuario/adicionar`;

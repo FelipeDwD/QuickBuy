@@ -4,14 +4,16 @@ using Dwd.Lab.Repositorio.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
     [DbContext(typeof(LabDataContext))]
-    partial class LabDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200129151522_AlterUser")]
+    partial class AlterUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,6 +72,21 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("ImagemProduto");
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ImagemUsuario");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ItemPedido", b =>
