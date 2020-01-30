@@ -43,7 +43,6 @@ namespace Dwd.Lab.Repositorio.Map
 
             builder
                 .Property(u => u.Imagem)
-                .IsRequired()
                 .HasMaxLength(70);
 
             builder

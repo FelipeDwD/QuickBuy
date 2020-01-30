@@ -66,6 +66,7 @@ namespace Dwd.Lab.Web.Controllers
                 {
                     if (!verificarCpf)
                     {
+                        usuario.DataCadastro = DateTime.Now;
                         this._usuarioRepositorio.Adicionar(usuario);
                         return Created("api/usuario", usuario);
                     }

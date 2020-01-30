@@ -42,6 +42,8 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   save(): void {
     this.ativarSpinner = true;
 
+    this.verificarSexo();
+
     if(this.arquivoSelecionado != null){
       this.cadastroImagem();
     }else{
@@ -78,6 +80,19 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
         err => {
           this.mensagemValidacao = err.error;
         });
+  }
+
+  verificarSexo():void{
+    let sexo = document.getElementsByName('checkSexo') as unknown as HTMLInputElement;
+
+    if(sexo[0].checked){
+        this.usuario.sexo = 'M';
+        this.usuario.imagem = "defaultM.png"
+    }else if(sexo[1].checked){
+      this.usuario.sexo = 'F';
+      this.usuario.imagem = "defaultF.png"
+    }
+
   }
 
 
