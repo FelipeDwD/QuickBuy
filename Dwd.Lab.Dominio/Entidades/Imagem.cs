@@ -43,7 +43,7 @@ namespace Dwd.Lab.Dominio.Entidades
             var novoNomeArquivo = new String(arrayNomeCompacto).Replace(" ", "-") + now  + "." + extensao;
 
             //Endereço da pasta onde irá ser criado o arquivo no servidor
-            var pastaArquivos = this._hostingEnvironment.WebRootPath + @"\arquivos\";
+            var pastaArquivos = this._hostingEnvironment.WebRootPath + @"\image\";
 
             //Guarda o novo nome completo do arquivo (Caminho + novo nome)
             var nomeCompleto = pastaArquivos + novoNomeArquivo;

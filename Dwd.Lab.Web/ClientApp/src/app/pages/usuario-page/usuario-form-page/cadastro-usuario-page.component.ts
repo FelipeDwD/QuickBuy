@@ -17,6 +17,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected usuario: Usuario;
   protected arquivoSelecionado: File;
   protected emailConfirmado: string;
+ 
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
@@ -42,7 +43,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   save(): void {
     this.ativarSpinner = true;
 
-    this.verificarSexo();
+    this.verificarSexo();    
 
     if(this.arquivoSelecionado != null){
       this.cadastroImagem();
@@ -55,6 +56,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   inputChange(file: FileList): void {
     this.arquivoSelecionado = file[0];
   }
+  
 
   cadastroImagem(): void {
     this.imagemService.enviarArquivo(this.arquivoSelecionado)
@@ -83,14 +85,14 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   verificarSexo():void{
-    let sexo = document.getElementsByName('checkSexo') as unknown as HTMLInputElement;
+    let sexo = document.getElementsByName('checkSexo') as any as HTMLInputElement;
 
     if(sexo[0].checked){
         this.usuario.sexo = 'M';
-        this.usuario.imagem = "defaultM.png"
+        this.usuario.imagem = 'defaultM.png'        
     }else if(sexo[1].checked){
-      this.usuario.sexo = 'F';
-      this.usuario.imagem = "defaultF.png"
+      this.usuario.sexo = 'F';      
+      this.usuario.imagem = 'defaultF.png'
     }
 
   }

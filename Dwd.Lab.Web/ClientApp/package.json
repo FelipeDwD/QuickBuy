@@ -28,7 +28,7 @@
     "core-js": "^2.6.11",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.5.4",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "typescript": "~2.7.2"
+    "typescript": "^2.9.2"
   },
   "optionalDependencies": {
     "node-sass": "^4.9.3",
