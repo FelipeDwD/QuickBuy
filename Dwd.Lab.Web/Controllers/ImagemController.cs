@@ -1,4 +1,5 @@
 ﻿using Dwd.Lab.Dominio.Contratos;
+using Dwd.Lab.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
@@ -23,6 +24,21 @@ namespace Dwd.Lab.Web.Controllers
                 var nome = this._imagem.EnviarParaServidor();
 
                 return Json(nome);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete([FromBody] Imagem imagem)
+        {
+            try
+            {
+                this._imagem.RemoverDoServidor(imagem.Nome);
+
+                return Ok();
             }
             catch (Exception ex)
             {

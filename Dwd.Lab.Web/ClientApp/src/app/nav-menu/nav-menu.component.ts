@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 import { UsuarioService } from '../services/usuario/usuario.service';
+import { Usuario } from '../Models/usuario';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
+  
+  
+
+    public usuario: Usuario;
 
     //Ao colocar um(vários parâmetros no construtor, o o TypeScript entende como uma declaração do tipo na classe, e automaticamente faz a instância do tipo).
-    constructor(private router: Router, private usuarioServico: UsuarioService) {      
+    constructor(private router: Router, 
+      private usuarioService: UsuarioService) {     
+      
+    }
 
+    ngOnInit(): void {
+      
     }
 
   isExpanded = false;
@@ -26,8 +36,8 @@ export class NavMenuComponent {
   }
 
   usuarioLogado(): boolean{
-    let logado = this.usuarioServico.logado();
-    if(logado){
+    let logado = this.usuarioService.logado();
+    if(logado){      
       return true;
     }else{
       return false;
@@ -35,7 +45,11 @@ export class NavMenuComponent {
   }
 
   logout():void{
-    this.usuarioServico.logout();
+    this.usuarioService.logout();
   }
+
+ 
+
+  
 
 }

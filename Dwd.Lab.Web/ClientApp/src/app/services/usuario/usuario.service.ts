@@ -25,7 +25,7 @@ export class UsuarioService extends BaseService{
             super();
          }
 
-    public get getUser() {
+    public getUser() {
         return this.user;
     }
 

@@ -24,4 +24,15 @@ export class ImagemService extends BaseService{
         return this.http.post<string>(this.baseURL, formData);
     }   
 
+    public excluirArquivo(nomeArquivo: string):Observable<string>{
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        let body = {
+            nome: nomeArquivo
+        }
+
+        this.baseURL = `${this.urlApi}/imagem/delete`;
+        return this.http.post<string>(this.baseURL, body, {headers});
+    }
+
 }

@@ -50,10 +50,19 @@ namespace Dwd.Lab.Dominio.Entidades
 
             using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
             {
-                formFile.CopyTo(streamArquivo);
+                formFile.CopyTo(streamArquivo);               
             }
 
             return novoNomeArquivo;
+        }
+
+        public void RemoverDoServidor(string arquivo)
+        {
+            if (!arquivo.Equals("defaultM.png") || arquivo.Equals("defaultF.png"))
+            {
+                File.Delete($@"C:\Users\Felipe Neves\Desktop\QuickBuy\Dwd.Lab.Web\wwwroot\image\{arquivo}");
+            }
+            
         }
     }
 }

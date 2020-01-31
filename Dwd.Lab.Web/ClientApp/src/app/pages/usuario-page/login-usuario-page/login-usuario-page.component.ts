@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Usuario } from 'src/app/Models/usuario';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { error } from 'util';
 import { FormComponent } from 'src/app/shared/form/form.component';
+import { NavMenuComponent } from 'src/app/nav-menu/nav-menu.component';
 
 @Component({
   selector: 'app-login-usuario-page',
@@ -18,7 +19,7 @@ export class LoginUsuarioPageComponent extends FormComponent implements OnInit {
   public mensagem: string;
   
 
-
+ 
 
   constructor(
     private router: Router,
@@ -40,8 +41,8 @@ export class LoginUsuarioPageComponent extends FormComponent implements OnInit {
       .subscribe(
         user => {
           //Essa linha será executada no caso de retorno sem erro.              
-          this.usuarioService.login(user);
-
+          this.usuarioService.login(user);         
+          
           if (this.returnUrl == undefined) {
             //Caso o usuário ir direto pelo login (para logar)
             //Se credenciais corretas: ele será redirecionado para o home

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GridComponent } from 'src/app/shared/grid/grid.component';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/Models/usuario';
+import { ImagemService } from 'src/app/services/imagem/imagemUsuario.service';
 
 @Component({
   selector: 'app-usuario-grid-page',
@@ -10,7 +11,8 @@ import { Usuario } from 'src/app/Models/usuario';
 })
 export class UsuarioGridPageComponent extends GridComponent implements OnInit {
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,
+    private imagemService: ImagemService) {
     super();
    }
 
@@ -32,7 +34,8 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
   deleteUser(user: Usuario):void{
     this.usuarioService.deletar(user)
     .subscribe()
-      location.reload(true);
+      this.imagemService.excluirArquivo(user.imagem)
+      .subscribe();
+      location.reload(true);      
   }
-
 }

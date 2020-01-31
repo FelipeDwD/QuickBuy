@@ -3,5 +3,6 @@
     public interface IImagem
     {
         string EnviarParaServidor();
+        void RemoverDoServidor(string arquivo);
     }
 }
