@@ -7,4 +7,5 @@ export class Usuario {
     senha: string;
     imagem: string;
     sexo: string;
+    ativo: boolean;
 }

@@ -67,6 +67,7 @@ namespace Dwd.Lab.Web.Controllers
                     if (!verificarCpf)
                     {
                         usuario.DataCadastro = DateTime.Now;
+                        usuario.Ativo = false;
                         this._usuarioRepositorio.Adicionar(usuario);
                         return Created("api/usuario", usuario);
                     }
@@ -80,6 +81,23 @@ namespace Dwd.Lab.Web.Controllers
                     return BadRequest("Já temos um usuário com esse e-mail");
                 }               
 
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
+        [HttpPost("alterarStatus")]
+        public IActionResult AlterarStatus([FromBody] Usuario usuario)
+        {
+            try
+            {
+                bool ativo = usuario.Ativo ? usuario.Ativo = false : usuario.Ativo = true;
+                
+                this._usuarioRepositorio.Atualizar(usuario);
+
+                return Ok();
             }
             catch (Exception ex)
             {

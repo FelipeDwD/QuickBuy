@@ -31,11 +31,18 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
     });         
   }
 
-  deleteUser(user: Usuario):void{
-    this.usuarioService.deletar(user)
+  alterarStatus(usuario: Usuario):void{
+    this.usuarioService.alterarStatus(usuario)
     .subscribe()
-      this.imagemService.excluirArquivo(user.imagem)
-      .subscribe();
-      location.reload(true);      
+    location.reload(true);
   }
+
+  //Método desabilitado em: 2020-02-01
+  // deleteUser(user: Usuario):void{
+  //   this.usuarioService.deletar(user)
+  //   .subscribe()
+  //     this.imagemService.excluirArquivo(user.imagem)
+  //     .subscribe();
+  //     location.reload(true);      
+  // }
 }

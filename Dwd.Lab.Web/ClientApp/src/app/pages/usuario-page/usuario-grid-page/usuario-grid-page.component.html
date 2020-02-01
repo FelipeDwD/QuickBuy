@@ -6,7 +6,8 @@
       <th scope="col">Sobrenome</th>
       <th scope="col">E-mail</th>
       <th scope="col">Imagem</th>
-      <th scope="col" style="text-align: center;">Excluir</th>
+      <th scope="col">Status</th>
+      <th scope="col" style="text-align: center;">Bloquear/Desbloquear</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +17,26 @@
       <td> {{item.sobrenome}} </td>
       <td> {{item.email}} </td>
       <td><img style="width: 50px; height: 50px; border-radius: 50%;" src="../../../../../../image/{{item.imagem}}"> </td>
-      <td style="background-color:lightgrey; text-align: center;"> <button class="btn btn-danger" (click)="deleteUser(item)">Excluir</button></td>
+      <td>
+        <div style="color: darkgreen;" *ngIf="item.ativo">
+            Ativo
+        </div>
+        <div style="color: darkred;" *ngIf="!item.ativo">
+          Inativo
+        </div>
+      </td>
+      <td style="text-align: center;">
+        <div *ngIf="item.ativo">
+          <button title="Usuário ativo" (click)="alterarStatus(item)">
+            <img style="width: 50px; height: 50px;" src="../../../../assets/sistema/ativo.png">
+          </button>
+        </div>  
+        <div *ngIf="!item.ativo">
+          <button title="Usuário inativo" (click)="alterarStatus(item)">
+            <img style="width: 50px; height: 50px;" src="../../../../assets/sistema/inativo.png">
+          </button>
+          </div> 
+        </td>
     </tr>
   </tbody>
 

@@ -10,5 +10,7 @@ namespace Dwd.Lab.Dominio.Contratos
         bool VerificarEmail(string email);
 
         bool VerificarCpf(string cpf);
+
+       
     }
 }

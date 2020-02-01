@@ -21,6 +21,8 @@ namespace Dwd.Lab.Dominio.Entidades
         public string Imagem { get; set; }
         public string  Sexo { get; set; }
 
+        public bool Ativo { get; set; }
+
 
 
 

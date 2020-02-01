@@ -10,7 +10,7 @@ namespace Dwd.Lab.Repositorio.Repositorios
     {
         public UsuarioRepositorio(LabDataContext labDataContext) : base(labDataContext)
         {
-        }
+        }        
 
         public Usuario GetByCredenciais(string email, string senha)
         {

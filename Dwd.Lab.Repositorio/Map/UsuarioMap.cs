@@ -50,6 +50,11 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(1);
 
+            builder
+                .Property(u => u.Ativo)
+                .HasColumnType("char")
+                .IsRequired();
+
 
             builder.ToTable("Usuario");
 
