@@ -3,6 +3,8 @@ import { GridComponent } from 'src/app/shared/grid/grid.component';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { Usuario } from 'src/app/Models/usuario';
 import { ImagemService } from 'src/app/services/imagem/imagemUsuario.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-grid-page',
@@ -12,7 +14,8 @@ import { ImagemService } from 'src/app/services/imagem/imagemUsuario.service';
 export class UsuarioGridPageComponent extends GridComponent implements OnInit {
 
   constructor(private usuarioService: UsuarioService,
-    private imagemService: ImagemService) {
+    private imagemService: ImagemService,
+    private router: Router) {
     super();
    }
 
@@ -32,7 +35,8 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
   }
 
   editar(user: Usuario):void{
-    console.log(user.nome)
+    sessionStorage.setItem("user", JSON.stringify(user));
+    this.router.navigate(['/usuario-form']);
   }
 
   alterarStatus(usuario: Usuario):void{  

@@ -17,6 +17,8 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected usuario: Usuario;
   protected arquivoSelecionado: File;
   protected emailConfirmado: string;
+  
+  protected masculino: boolean = true;
  
 
   constructor(private router: Router,
@@ -26,13 +28,19 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   ngOnInit() {
-    this.usuario = new Usuario();
+    let usuarioSession = sessionStorage.getItem('user');
+
+    if(usuarioSession){
+      this.usuario = JSON.parse(usuarioSession);
+    }else{
+      this.usuario = new Usuario();
+    }   
   }
 
   back(): void {
     let logado = this.usuarioService.logado();
     this.paginaAnterior = history.back();
-
+    sessionStorage.setItem('user', null);
     if (logado) {
       this.router.navigate([this.paginaAnterior]);
     } else {
@@ -42,6 +50,8 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
 
   save(): void {
     this.ativarSpinner = true;
+ 
+    sessionStorage.setItem('user', null);
 
     this.verificarSexo();    
 
@@ -94,9 +104,9 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
       this.usuario.sexo = 'F';      
       this.usuario.imagem = 'defaultF.png'
     }
+  } 
 
+  usuarioLogado():boolean{
+    return this.usuarioService.logado();
   }
-
-
-
 }
