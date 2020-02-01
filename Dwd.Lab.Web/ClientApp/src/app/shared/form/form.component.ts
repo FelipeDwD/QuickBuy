@@ -8,7 +8,7 @@ import * as $ from "jquery";
 })
 export class FormComponent implements OnInit {
 
-  protected ativarSpinner: boolean = false;
+  protected ativarSpinner: boolean;
   protected mensagemValidacao: string = "";     
 
   constructor() { }

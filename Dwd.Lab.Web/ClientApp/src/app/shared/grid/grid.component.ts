@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit {
 
+  protected ativarSpinner: boolean;
   protected items: any;
 
   constructor() { }

@@ -31,10 +31,20 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
     });         
   }
 
-  alterarStatus(usuario: Usuario):void{
+  editar(user: Usuario):void{
+    console.log(user.nome)
+  }
+
+  alterarStatus(usuario: Usuario):void{  
+    this.ativarSpinner = true;
     this.usuarioService.alterarStatus(usuario)
-    .subscribe()
-    location.reload(true);
+    .subscribe( 
+      a => {
+        this.loadUsers();
+        this.ativarSpinner = false;
+      }
+    );      
+    //location.reload();
   }
 
   //Método desabilitado em: 2020-02-01

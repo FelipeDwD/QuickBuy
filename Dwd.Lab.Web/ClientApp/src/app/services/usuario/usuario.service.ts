@@ -56,8 +56,13 @@ export class UsuarioService extends BaseService{
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         var body = {
+            nome: usuario.nome,
+            sobrenome: usuario.sobrenome,
+            cpf: usuario.cpf,
             email: usuario.email,
-            senha: usuario.senha,           
+            senha: usuario.senha,
+            imagem: usuario.imagem,
+            sexo: usuario.sexo      
         }
 
         this.baseURL = `${this.urlApi}/usuario/login`

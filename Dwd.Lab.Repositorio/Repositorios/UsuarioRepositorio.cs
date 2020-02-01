@@ -10,7 +10,19 @@ namespace Dwd.Lab.Repositorio.Repositorios
     {
         public UsuarioRepositorio(LabDataContext labDataContext) : base(labDataContext)
         {
-        }        
+        }
+
+        public bool Ativo(string cpf)
+        {
+            var usuario = LabDataContext
+                .Usuario
+                .FirstOrDefault(u => u.Cpf == cpf && u.Ativo == true);
+
+            if (usuario != null)
+                return true;
+
+            return false;
+        }      
 
         public Usuario GetByCredenciais(string email, string senha)
         {

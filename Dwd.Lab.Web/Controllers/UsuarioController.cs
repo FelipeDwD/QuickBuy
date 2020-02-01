@@ -43,7 +43,14 @@ namespace Dwd.Lab.Web.Controllers
             {
                 var usuarioReturn = this._usuarioRepositorio.GetByCredenciais(usuario.Email, usuario.Senha);
                 if (usuarioReturn != null)
+                {
+                    var ativo = this._usuarioRepositorio.Ativo(usuarioReturn.Cpf);     
+                    if(ativo)
                     return Ok(usuarioReturn);
+
+                    return BadRequest("Usuário bloqueado.");
+                }
+                    
 
 
                 return BadRequest("Usuário ou senha inválido");
@@ -67,7 +74,7 @@ namespace Dwd.Lab.Web.Controllers
                     if (!verificarCpf)
                     {
                         usuario.DataCadastro = DateTime.Now;
-                        usuario.Ativo = false;
+                        usuario.Ativo = true;
                         this._usuarioRepositorio.Adicionar(usuario);
                         return Created("api/usuario", usuario);
                     }
