@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/Models/usuario';
 import { FormComponent } from 'src/app/shared/form/form.component';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 import { ImagemService } from 'src/app/services/imagem/imagemUsuario.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-cadastro-usuario-page',
@@ -18,7 +19,8 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected arquivoSelecionado: File;
   protected emailConfirmado: string;
   
-  protected masculino: boolean = true;
+  protected sexoMasculino: boolean;
+  
  
 
   constructor(private router: Router,
@@ -32,6 +34,9 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
 
     if(usuarioSession){
       this.usuario = JSON.parse(usuarioSession);
+      if(this.usuario.sexo == "M"){
+        this.sexoMasculino = true;
+      }
     }else{
       this.usuario = new Usuario();
     }   
