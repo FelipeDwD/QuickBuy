@@ -39,13 +39,13 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
       }
     }else{
       this.usuario = new Usuario();
-    }   
+    } 
   }
 
   back(): void {
     let logado = this.usuarioService.logado();
     this.paginaAnterior = history.back();
-    sessionStorage.setItem('user', null);
+        
     if (logado) {
       this.router.navigate([this.paginaAnterior]);
     } else {
@@ -54,9 +54,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   save(): void {
-    this.ativarSpinner = true;
- 
-    sessionStorage.setItem('user', null);
+    this.ativarSpinner = true;    
 
     this.verificarSexo();    
 

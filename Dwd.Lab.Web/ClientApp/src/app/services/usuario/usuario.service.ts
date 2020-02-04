@@ -93,6 +93,17 @@ export class UsuarioService extends BaseService{
         return this.http.get<Usuario[]>(this.baseURL)
     }
 
+    public retornarUsuario(usuario: Usuario):Observable<Usuario>{
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        let body = {
+            id: usuario.id
+        }
+
+        this.baseURL = `${this.urlApi}/usuario/getbyid`
+        return this.http.post<Usuario>(this.baseURL, body, {headers});
+    }
+
     public deletar(usuario: Usuario): Observable<Usuario>{
         
         const headers = new HttpHeaders().set('content-type', 'application/json');
