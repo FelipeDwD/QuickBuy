@@ -36,6 +36,24 @@ namespace Dwd.Lab.Web.Controllers
             
         }
 
+        [HttpGet("getbyid")]
+        public IActionResult GetById([FromBody] Usuario usuario)
+        {
+            try
+            {
+                var user = this._usuarioRepositorio.RetornarPorId(usuario.Id);
+
+                if(user != null)
+                return Ok(usuario);
+
+                return BadRequest("Usuário não encontrado");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
         [HttpPost("login")]
         public ActionResult Login([FromBody] Usuario usuario)
         {
