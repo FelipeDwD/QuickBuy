@@ -69,7 +69,7 @@ export class UsuarioService extends BaseService{
         return this.http.post<Usuario>(this.baseURL, body, { headers });
     }
 
-    public cadastrarNovoUsuario(usuario: Usuario): Observable<Usuario>{
+    public post(usuario: Usuario): Observable<Usuario>{
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
         let body = {
@@ -122,6 +122,25 @@ export class UsuarioService extends BaseService{
 
         this.baseURL = `${this.urlApi}/usuario/alterarStatus`
         return this.http.post<Usuario>(this.baseURL, body, {headers});
+    }
+
+    public put(usuario:Usuario): Observable<Usuario>{
+        const headers = new HttpHeaders().set('content-type', 'application/json');
+
+        let body = {
+            id: usuario.id,
+            nome: usuario.nome,
+            sobrenome: usuario.sobrenome,
+            cpf: usuario.cpf,
+            email: usuario.email,
+            senha: usuario.senha,
+            imagem: usuario.imagem,
+            sexo: usuario.sexo,
+            ativo: usuario.ativo
+        }
+
+        this.baseURL = `${this.urlApi}/usuario`
+        return this.http.put<Usuario>(this.baseURL, body, {headers});
     }
 
 }

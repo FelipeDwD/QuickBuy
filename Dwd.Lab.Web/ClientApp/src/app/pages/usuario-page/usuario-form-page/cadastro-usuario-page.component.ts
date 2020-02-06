@@ -20,7 +20,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected emailConfirmado: string;
   
   protected sexoMasculino: boolean;
-  
+  protected isEdit: boolean;
  
 
   constructor(private router: Router,
@@ -33,12 +33,14 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
     let usuarioSession = sessionStorage.getItem('user');
 
     if(usuarioSession){
-      this.usuario = JSON.parse(usuarioSession);
+      this.usuario = JSON.parse(usuarioSession);   
+      this.isEdit = true; 
       if(this.usuario.sexo == "M"){
         this.sexoMasculino = true;
       }
     }else{
       this.usuario = new Usuario();
+      this.isEdit = false;    
     }   
   }
 
@@ -83,20 +85,36 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   cadastrarSimples(): void {
-    this.usuarioService.cadastrarNovoUsuario(this.usuario)
+    if(this.isEdit){
+      this.usuarioService.put(this.usuario)
       .subscribe(
         ok => {
-          let logado = this.usuarioService.logado();
+          this.redirect();
+        },
+        err => {
+          this.mensagemValidacao = err.error;
+        }
+      )
+    }else{
+      this.usuarioService.post(this.usuario)
+      .subscribe(
+        ok => {
+          this.redirect();
+        },
+        err => {
+          this.mensagemValidacao = err.error;
+        });
+    }    
+  }
+
+  redirect():void{
+    let logado = this.usuarioService.logado();
 
           if (logado) {
             this.router.navigate(['/usuario-main']);
           } else {
             this.router.navigate(['/login-usuario']);
           }
-        },
-        err => {
-          this.mensagemValidacao = err.error;
-        });
   }
 
   verificarSexo():void{
@@ -109,9 +127,5 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
       this.usuario.sexo = 'F';      
       this.usuario.imagem = 'defaultF.png'
     }
-  } 
-
-  usuarioLogado():boolean{
-    return this.usuarioService.logado();
-  }
+  }  
 }

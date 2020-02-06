@@ -124,7 +124,22 @@ namespace Dwd.Lab.Web.Controllers
             {
                 return BadRequest(ex.Message.ToString());
             }
-        }        
+        }
+        
+        [HttpPut]
+        public IActionResult Put([FromBody] Usuario usuario)
+        {
+            try
+            {
+                this._usuarioRepositorio.Atualizar(usuario);
+                return Created("api/usuario", usuario);               
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
     }
 
 }
