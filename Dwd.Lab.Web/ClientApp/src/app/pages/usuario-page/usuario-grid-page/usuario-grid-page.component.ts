@@ -28,10 +28,7 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
     .subscribe(
       item =>{
       this.items = item;
-    },
-    err =>{
-
-    });         
+    })
   }
 
   editar(user: Usuario):void{
@@ -39,16 +36,13 @@ export class UsuarioGridPageComponent extends GridComponent implements OnInit {
     this.router.navigate(['/usuario-form']);
   }
 
-  alterarStatus(usuario: Usuario):void{  
-    this.ativarSpinner = true;
+  alterarStatus(usuario: Usuario):void{      
     this.usuarioService.alterarStatus(usuario)
     .subscribe( 
       a => {
-        this.loadUsers();
-        this.ativarSpinner = false;
+        this.loadUsers();        
       }
-    );      
-    //location.reload();
+    );     
   }
 
   //Método desabilitado em: 2020-02-01

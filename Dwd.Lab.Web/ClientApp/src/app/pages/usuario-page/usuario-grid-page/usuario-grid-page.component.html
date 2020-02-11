@@ -31,18 +31,15 @@
         </div>
         </td>        
           <td style="text-align: center;">
-            <div *ngIf="item.ativo">
-              <div class="spinner-border text-primary" role="status" *ngIf="ativarSpinner">
-                <span class="sr-only"></span>
-              </div>
+            <div class="spinner-border text-primary" role="status" *ngIf="ativarSpinner">
+              <span class="sr-only"></span>
+            </div>
+            <div *ngIf="item.ativo">             
               <button class="btn btn-danger" title="Bloquear usuário" (click)="alterarStatus(item)" *ngIf="!ativarSpinner">
                   BLOQUEAR
               </button>
             </div>  
-            <div *ngIf="!item.ativo">
-              <div class="spinner-border text-primary" role="status" *ngIf="ativarSpinner">
-                <span class="sr-only"></span>
-              </div>
+            <div *ngIf="!item.ativo">             
               <button class="btn btn-success" title="Desbloquear usuário" (click)="alterarStatus(item)" *ngIf="!ativarSpinner">
                 DESBLOQUEAR
               </button>

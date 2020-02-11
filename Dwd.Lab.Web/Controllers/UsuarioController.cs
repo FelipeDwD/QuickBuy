@@ -79,6 +79,31 @@ namespace Dwd.Lab.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Método para laboratório, o mesmo insere vários usuários ao mesmo tempo.
+        /// </summary>
+        /// <param name="usuarios"></param>
+        /// <returns></returns>
+        [HttpPost("adicionarN")]
+        public IActionResult Adicionar([FromBody] List<Usuario> usuarios)
+        {
+            try
+            {                
+                foreach (Usuario u in usuarios)
+                {
+                    u.Ativo = true;
+                    u.DataCadastro = DateTime.Now;
+                    this._usuarioRepositorio.Adicionar(u);
+                }
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
         [HttpPost("adicionar")]
         public IActionResult Adicionar([FromBody] Usuario usuario)
         {
@@ -149,8 +174,25 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                this._usuarioRepositorio.Atualizar(usuario);
-                return Created("api/usuario", usuario);               
+                var verificarCpf = this._usuarioRepositorio.VerificarCpf(usuario.Cpf);
+                var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+
+                if (!verificarCpf)
+                {
+                    if (!verificarEmail)
+                    {
+                        this._usuarioRepositorio.Atualizar(usuario);
+                        return Created("api/usuario", usuario);
+                    }
+                    else
+                    {
+                        return BadRequest("Já temos um usuário com esse E-mail.");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Já temos um usuário com esse CPF.");
+                }                            
 
             }
             catch (Exception ex)

@@ -25,7 +25,7 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(u => u.Email)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(45);
 
             builder
                 .Property(u => u.Senha)
