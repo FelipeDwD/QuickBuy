@@ -14,11 +14,11 @@ namespace Dwd.Lab.Web.Controllers
     [Route("api/[Controller]")]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioRepositorio _usuarioRepositorio;        
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
 
         public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
         {
-            this._usuarioRepositorio = usuarioRepositorio;           
+            this._usuarioRepositorio = usuarioRepositorio;
         }
 
         [HttpGet]
@@ -33,7 +33,7 @@ namespace Dwd.Lab.Web.Controllers
             {
                 return BadRequest(ex.ToString());
             }
-            
+
         }
 
         [HttpGet("getbyid")]
@@ -43,8 +43,8 @@ namespace Dwd.Lab.Web.Controllers
             {
                 var user = this._usuarioRepositorio.RetornarPorId(usuario.Id);
 
-                if(user != null)
-                return Ok(usuario);
+                if (user != null)
+                    return Ok(usuario);
 
                 return BadRequest("Usuário não encontrado");
             }
@@ -62,13 +62,13 @@ namespace Dwd.Lab.Web.Controllers
                 var usuarioReturn = this._usuarioRepositorio.GetByCredenciais(usuario.Email, usuario.Senha);
                 if (usuarioReturn != null)
                 {
-                    var ativo = this._usuarioRepositorio.Ativo(usuarioReturn.Cpf);     
-                    if(ativo)
-                    return Ok(usuarioReturn);
+                    var ativo = this._usuarioRepositorio.Ativo(usuarioReturn.Cpf);
+                    if (ativo)
+                        return Ok(usuarioReturn);
 
                     return BadRequest("Usuário bloqueado.");
                 }
-                    
+
 
 
                 return BadRequest("Usuário ou senha inválido");
@@ -88,7 +88,7 @@ namespace Dwd.Lab.Web.Controllers
         public IActionResult Adicionar([FromBody] List<Usuario> usuarios)
         {
             try
-            {                
+            {
                 foreach (Usuario u in usuarios)
                 {
                     u.Ativo = true;
@@ -123,13 +123,13 @@ namespace Dwd.Lab.Web.Controllers
                     }
                     else
                     {
-                        return BadRequest("Já temos um usuário com esse CPF.");   
-                    }                    
+                        return BadRequest("Já temos um usuário com esse CPF.");
+                    }
                 }
                 else
                 {
                     return BadRequest("Já temos um usuário com esse e-mail");
-                }               
+                }
 
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace Dwd.Lab.Web.Controllers
             try
             {
                 bool ativo = usuario.Ativo ? usuario.Ativo = false : usuario.Ativo = true;
-                
+
                 this._usuarioRepositorio.Atualizar(usuario);
 
                 return Ok();
@@ -168,31 +168,37 @@ namespace Dwd.Lab.Web.Controllers
                 return BadRequest(ex.Message.ToString());
             }
         }
-        
+
         [HttpPut]
         public IActionResult Put([FromBody] Usuario usuario)
         {
             try
             {
-                var verificarCpf = this._usuarioRepositorio.VerificarCpf(usuario.Cpf);
-                var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+                var user = this._usuarioRepositorio.RetornarPorId(usuario.Id);
+                bool emailProprio = user.Email == usuario.Email;
+                
 
-                if (!verificarCpf)
+                if (emailProprio)
                 {
-                    if (!verificarEmail)
-                    {
-                        this._usuarioRepositorio.Atualizar(usuario);
-                        return Created("api/usuario", usuario);
-                    }
-                    else
-                    {
-                        return BadRequest("Já temos um usuário com esse E-mail.");
-                    }
+                    this._usuarioRepositorio.Atualizar(usuario);
+                    return Ok(usuario);
                 }
                 else
                 {
-                    return BadRequest("Já temos um usuário com esse CPF.");
-                }                            
+                    var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+
+                    if (!verificarEmail)
+                    {
+                        this._usuarioRepositorio.Atualizar(usuario);
+                        return Ok(usuario);
+                    }
+                    else
+                    {
+                        return BadRequest("Já temos um usuário com esse e-mail");
+                    }
+                }
+
+
 
             }
             catch (Exception ex)

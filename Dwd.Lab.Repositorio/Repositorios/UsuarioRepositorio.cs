@@ -43,12 +43,12 @@ namespace Dwd.Lab.Repositorio.Repositorios
 
         public bool VerificarEmail(string email)
         {
-            var existe = LabDataContext.Usuario.FirstOrDefault(u => u.Email == email);
+            var existe = LabDataContext.Usuario.FirstOrDefault(u => u.Email == email);           
 
             if (existe != null)
                 return true;
 
             return false;
-        }
+        }           
     }
 }
