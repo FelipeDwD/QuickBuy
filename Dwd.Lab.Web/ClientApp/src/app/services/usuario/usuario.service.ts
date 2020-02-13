@@ -18,12 +18,16 @@ import { BaseService } from "../base.service";
 export class UsuarioService extends BaseService{
 
     private baseURL: string;
-    public user: Usuario;
+    public user: Usuario;    
+
+    //Cabeçalho e corpo HTML.
+    private headers = new HttpHeaders().set('content-type', 'application/json');
+    private body: any;
 
     constructor(
         private http: HttpClient) {
             super();
-         }
+         }    
 
     public getUser() {
         return this.user;
@@ -33,6 +37,20 @@ export class UsuarioService extends BaseService{
         this.user = user;
     }
 
+    private buildBody(usuario: Usuario){
+        this.body = {
+            id: usuario.id,
+            nome: usuario.nome,
+            sobrenome: usuario.sobrenome,
+            cpf: usuario.cpf,
+            email: usuario.email,
+            senha: usuario.senha,
+            imagem: usuario.imagem,
+            sexo: usuario.sexo,
+            ativo: usuario.ativo
+        }
+    }
+    
     public login(user: Usuario): void {
         this.setUser(user);
         sessionStorage.setItem("usuario-logado", "1");
@@ -53,105 +71,31 @@ export class UsuarioService extends BaseService{
     }    
 
     public loginUser(usuario: Usuario): Observable<Usuario> {
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        var body = {
-            nome: usuario.nome,
-            sobrenome: usuario.sobrenome,
-            cpf: usuario.cpf,
-            email: usuario.email,
-            senha: usuario.senha,
-            imagem: usuario.imagem,
-            sexo: usuario.sexo      
-        }
-
+        this.buildBody(usuario);
         this.baseURL = `${this.urlApi}/usuario/login`
-        return this.http.post<Usuario>(this.baseURL, body, { headers });
+        return this.http.post<Usuario>(this.baseURL, this.body, { headers: this.headers });
     }
 
-    public post(usuario: Usuario): Observable<Usuario>{
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            nome: usuario.nome,
-            sobrenome: usuario.sobrenome,
-            cpf: usuario.cpf,
-            email: usuario.email,
-            senha: usuario.senha,
-            imagem: usuario.imagem,
-            sexo: usuario.sexo
-        }
-
+    public post(usuario: Usuario): Observable<Usuario>{        
+        this.buildBody(usuario);
         this.baseURL = `${this.urlApi}/usuario/adicionar`;
-        return this.http.post<Usuario>(this.baseURL, body, {headers});
+        return this.http.post<Usuario>(this.baseURL, this.body, {headers: this.headers});
     }
 
     public retornarTodos():Observable<Usuario[]>{
-
         this.baseURL = `${this.urlApi}/usuario`
-
         return this.http.get<Usuario[]>(this.baseURL)
     }
 
-    public retornarUsuario(usuario: Usuario):Observable<Usuario>{
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            id: usuario.id
-        }
-
-        this.baseURL = `${this.urlApi}/usuario/getbyid`
-        return this.http.post<Usuario>(this.baseURL, body, {headers});
-    }
-
-    public deletar(usuario: Usuario): Observable<Usuario>{
-        
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            id: usuario.id
-        }
-
-        this.baseURL = `${this.urlApi}/usuario/delete`
-        return this.http.post<Usuario>(this.baseURL, body, {headers});
-    }  
-
     public alterarStatus(usuario: Usuario): Observable<Usuario>{
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            id: usuario.id,
-            nome: usuario.nome,
-            sobrenome: usuario.sobrenome,
-            cpf: usuario.cpf,
-            email: usuario.email,
-            senha: usuario.senha,
-            imagem: usuario.imagem,
-            sexo: usuario.sexo,
-            ativo: usuario.ativo
-        }
-
+        this.buildBody(usuario);       
         this.baseURL = `${this.urlApi}/usuario/alterarStatus`
-        return this.http.post<Usuario>(this.baseURL, body, {headers});
+        return this.http.post<Usuario>(this.baseURL, this.body, {headers: this.headers});
     }
 
-    public put(usuario:Usuario): Observable<Usuario>{
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-
-        let body = {
-            id: usuario.id,
-            nome: usuario.nome,
-            sobrenome: usuario.sobrenome,
-            cpf: usuario.cpf,
-            email: usuario.email,
-            senha: usuario.senha,
-            imagem: usuario.imagem,
-            sexo: usuario.sexo,
-            ativo: usuario.ativo
-        }
-
+    public put(usuario:Usuario): Observable<Usuario>{        
+        this.buildBody(usuario);
         this.baseURL = `${this.urlApi}/usuario`
-        return this.http.put<Usuario>(this.baseURL, body, {headers});
-    }
-
+        return this.http.put<Usuario>(this.baseURL, this.body, {headers: this.headers});
+    }    
 }

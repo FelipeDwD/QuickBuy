@@ -47,7 +47,7 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   back(): void {
     let logado = this.usuarioService.logado();
     this.paginaAnterior = history.back();
-    sessionStorage.setItem('user', null);
+    
     if (logado) {
       this.router.navigate([this.paginaAnterior]);
     } else {
@@ -56,18 +56,16 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   save(): void {
-    this.ativarSpinner = true;
- 
-    sessionStorage.setItem('user', null);
-
+    this.ativarSpinner = true;  
     this.verificarSexo();    
 
     if(this.arquivoSelecionado != null){
       this.cadastroImagem();
     }else{
       this.cadastrarSimples();
-    }
+    }    
     this.ativarSpinner = false;
+   
   }
 
   inputChange(file: FileList): void {
