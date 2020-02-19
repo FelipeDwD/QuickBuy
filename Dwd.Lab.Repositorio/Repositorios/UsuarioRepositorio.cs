@@ -3,6 +3,7 @@ using System.Linq;
 using Dwd.Lab.Dominio.Contratos;
 using Dwd.Lab.Dominio.Entidades;
 using Dwd.Lab.Repositorio.Contexto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dwd.Lab.Repositorio.Repositorios
 {
@@ -49,6 +50,20 @@ namespace Dwd.Lab.Repositorio.Repositorios
                 return true;
 
             return false;
-        }           
+        }
+        
+        public bool VerificarEmail(int id, string email)
+        {
+            var emailIsOfUser = LabDataContext
+                         .Usuario
+                         .AsNoTracking()
+                         .FirstOrDefault(u => u.Id == id && u.Email == email);
+
+            if (emailIsOfUser != null)
+                return true;
+
+            return false;
+           
+        }
     }
 }

@@ -174,27 +174,27 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                var user = this._usuarioRepositorio.RetornarPorId(usuario.Id);
-                bool emailProprio = user.Email == usuario.Email;
-                
+                var emailIsOfUser = this._usuarioRepositorio
+                    .VerificarEmail(usuario.Id, usuario.Email);
 
-                if (emailProprio)
+                if (emailIsOfUser)
                 {
                     this._usuarioRepositorio.Atualizar(usuario);
                     return Ok(usuario);
                 }
                 else
                 {
-                    var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
+                    var emailExiste = this._usuarioRepositorio
+                        .VerificarEmail(usuario.Email);
 
-                    if (!verificarEmail)
+                    if (emailExiste)
                     {
-                        this._usuarioRepositorio.Atualizar(usuario);
-                        return Ok(usuario);
+                        return BadRequest("Já temos um usuário com esse e-mail.");
                     }
                     else
                     {
-                        return BadRequest("Já temos um usuário com esse e-mail");
+                        this._usuarioRepositorio.Atualizar(usuario);
+                        return Ok(usuario);
                     }
                 }
 
