@@ -174,29 +174,52 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
+                bool editOk = false;
+
                 var emailIsOfUser = this._usuarioRepositorio
                     .VerificarEmail(usuario.Id, usuario.Email);
 
-                if (emailIsOfUser)
+                var cpfIsOfUser = this._usuarioRepositorio
+                                  .VerificarCpf(usuario.Id, usuario.Cpf);
+
+                if (emailIsOfUser && cpfIsOfUser)
                 {
-                    this._usuarioRepositorio.Atualizar(usuario);
+                    this._usuarioRepositorio
+                         .Atualizar(usuario);
                     return Ok(usuario);
                 }
                 else
                 {
-                    var emailExiste = this._usuarioRepositorio
-                        .VerificarEmail(usuario.Email);
+                    if (!cpfIsOfUser)
+                    {
+                        var existeCpf = this._usuarioRepositorio
+                            .VerificarCpf(usuario.Cpf);
 
-                    if (emailExiste)
-                    {
-                        return BadRequest("Já temos um usuário com esse e-mail.");
+                        if (existeCpf)
+                            return BadRequest("Já temos um usuário com esse CPF.");
+
+                        editOk = true;
                     }
-                    else
+
+                    if (!emailIsOfUser)
                     {
-                        this._usuarioRepositorio.Atualizar(usuario);
-                        return Ok(usuario);
+                        var existeEmail = this._usuarioRepositorio
+                            .VerificarEmail(usuario.Email);
+
+                        if (existeEmail)
+                            return BadRequest("Já temos um usuário com esse e-mail");
+
+                        editOk = true;
+
                     }
                 }
+
+                if (editOk)
+                    this._usuarioRepositorio
+                         .Atualizar(usuario);
+                return Ok(usuario);
+
+
 
 
 
