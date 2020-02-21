@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutoFormPageComponent implements OnInit {
 
+  a: any;
+  b: any;
+  c: any;
+  d: any;
+  e: any;
+
   constructor() { }
 
   ngOnInit() {

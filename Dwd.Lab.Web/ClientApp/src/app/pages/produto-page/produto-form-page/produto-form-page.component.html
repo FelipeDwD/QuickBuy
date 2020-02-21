@@ -1,3 +1,83 @@
-<p>
-  produto-form-page works!
-</p>
+<form class="form-group">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="codigoLoja">Código Loja:</label>
+      <input type="text" name="codigoLoja" id="codigoLoja" class="form-control" 
+      placeholder="Digite o código do produto" 
+      required
+      [(ngModel)]="a"
+      codigoLoja
+      #codigoLoja = "ngModel"
+      [ngClass] = "{'is-invalid' : codigoLoja.invalid && codigoLoja.touched }"
+     >
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="nome">Nome: </label>
+      <input type="text" name="nome" id="nome" class="form-control"
+      required
+      [(ngModel)]="c"
+      nome
+      #nome="ngModel"
+      placeholder="Digite o nome do produto"
+      [ngClass]= "{'is-invalid' : nome.invalid && nome.touched }">
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="categoria">Categoria:</label>
+       <select id="categoria" [(ngModel)]="b" class="form-control">
+         <option>Categoria1</option>
+         <option selected>Categoria2</option>
+         <option>Categoria3</option>
+       </select>
+    </div> 
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="descricao">Descrição: </label>
+      <textarea class="form-control" id="descricao" placeholder="Digite a descrição do produto"></textarea>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <label for="Preço">Preço R$: </label>
+      <input type="text" name="preco" id="preco"
+      class="form-control"
+      required
+      placeholder="Digite o valor do produto"
+      [(ngModel)]="d"
+      preco
+      #preco = "ngModel"
+      [ngClass] = "{'is-invalid': preco.invalid && preco.touched}">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="imagem">Imagem:</label>
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile04" placeholder="Perfil">
+        <label class="custom-file-label" for="inputGroupFile04"> Selecione uma imagem para o produto </label>
+      </div> 
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="fornecedor">Fornecedor: </label>
+       <select [(ngModel)]="e" class="form-control">
+         <option>Fornecedor1</option>
+         <option>Fornecedor2</option>
+         <option selected>Fornecedor3</option>
+       </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="disponivelVenda">
+        <label class="custom-control-label" for="disponivelVenda">Disponível para venda</label>
+      </div>
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <button class="btn btn-dark btn-block">Voltar</button>
+    </div>
+    <div class="col-md-6 mb-3">
+      <button class="btn btn-primary btn-block">Cadastrar</button>
+    </div>
+  </div>  
+</form>
