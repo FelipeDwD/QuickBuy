@@ -18,5 +18,7 @@ namespace Dwd.Lab.Dominio.Entidades
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
 
+        public virtual ICollection<Pessoa> Pessoas { get; set; }
+
     }
 }

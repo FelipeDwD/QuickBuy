@@ -43,6 +43,11 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(12);
 
+            builder
+                .HasMany(e => e.Pessoas)
+                .WithOne(p => p.Endereco)
+                .HasForeignKey(p => p.EnderecoId);
+
             builder.ToTable("Endereco");
 
 
