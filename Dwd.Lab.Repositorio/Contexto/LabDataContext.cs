@@ -14,8 +14,9 @@ namespace Dwd.Lab.Repositorio.Contexto
         public DbSet<Produto> Produto { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }        
         public DbSet<ImagemProduto> ImagemProduto { get; set; }
-
         public DbSet<Pessoa> Pessoa { get; set; }
+        public DbSet<CategoriaProduto> CategoriaProduto { get; set; }
+
 
         public LabDataContext(DbContextOptions<LabDataContext> options) : base(options)
         {
@@ -34,6 +35,7 @@ namespace Dwd.Lab.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new FormaPagamentoMap());          
             modelBuilder.ApplyConfiguration(new ImagemProdutoMap());
             modelBuilder.ApplyConfiguration(new PessoaMap());
+            modelBuilder.ApplyConfiguration(new CategoriaProdutoMap());
         }
     }
 }

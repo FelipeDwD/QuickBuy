@@ -10,8 +10,7 @@ import { Produto } from "src/app/Models/produto";
 
 export class ProdutoService extends BaseService{
 
-    private baseURL: string;
-    public produto: ProdutoService;
+       
 
     constructor(
         private http: HttpClient){

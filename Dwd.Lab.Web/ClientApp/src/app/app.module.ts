@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -19,6 +19,9 @@ import { ProdutoGridPageComponent } from './pages/produto-page/produto-grid-page
 import { ProdutoFormPageComponent } from './pages/produto-page/produto-form-page/produto-form-page.component';
 import { ProdutoMainPageComponent } from './pages/produto-page/produto-main-page/produto-main-page.component';
 import { ImagemService } from './services/imagem/imagemUsuario.service';
+import { CategoriaProdutoMainComponent } from './pages/categoria-produto-page/categoria-produto-main/categoria-produto-main.component';
+import { CategoriaProdutoFormComponent } from './pages/categoria-produto-page/categoria-produto-form/categoria-produto-form.component';
+import { CategoriaProdutoGridComponent } from './pages/categoria-produto-page/categoria-produto-grid/categoria-produto-grid.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ImagemService } from './services/imagem/imagemUsuario.service';
     GridComponent,
     ProdutoMainPageComponent,
     ProdutoGridPageComponent,
-    ProdutoFormPageComponent,   
+    ProdutoFormPageComponent,    
+    CategoriaProdutoMainComponent,
+    CategoriaProdutoFormComponent,
+    CategoriaProdutoGridComponent,   
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,7 +54,10 @@ import { ImagemService } from './services/imagem/imagemUsuario.service';
       { path: 'login-usuario', component: LoginUsuarioPageComponent},
       { path: 'usuario-form', component: CadastroUsuarioPageComponent},
       { path: 'usuario-main', component: UsuarioMainPageComponent, canActivate: [GuardaRotas]},
-      { path: 'usuario-grid', component: UsuarioGridPageComponent, canActivate: [GuardaRotas]}
+      { path: 'usuario-grid', component: UsuarioGridPageComponent, canActivate: [GuardaRotas]},
+      { path: 'categoria-produto-main', component: CategoriaProdutoMainComponent},
+      { path: 'categoria-produto-form', component: CategoriaProdutoFormComponent},
+      { path: 'categoria-produto-grid', component: CategoriaProdutoGridComponent} 
     ])
   ],
   providers: [UsuarioService,

@@ -1,0 +1,35 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="nomeCategoria">Nome da categoria:</label>
+      <input type="text" name="nomeCategoria" id="nomeCategoria"
+      class="form-control"
+      placeholder="Informe o nome da categoria"
+      required
+      [(ngModel)]="categoriaProduto.nome"
+      nome
+      #nome="ngModel"
+      [ngClass] = "{'is-invalid': nome.touched && nome.invalid}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="desc">Descrição:</label>
+      <textarea id="desc" class="form-control" placeholder="Informe uma descrição para categoria"
+      required
+      [(ngModel)]="categoriaProduto.descricao"
+      desc
+      #desc = "ngModel"
+      [ngClass] = "{'is-invalid': desc.touched && desc.invalid}"
+      ></textarea>
+  </div>  
+</div>
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <button class="btn btn-dark btn-block" (click)="back()">Voltar</button>
+  </div>
+  <div class="col-md-6 mb-3">
+    <button class="btn btn-primary btn-block" (click)="cadastrar()">Cadastrar</button>
+  </div>
+</div>
+</div>

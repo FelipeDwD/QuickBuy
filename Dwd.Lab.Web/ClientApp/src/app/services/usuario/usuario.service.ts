@@ -17,12 +17,10 @@ import { BaseService } from "../base.service";
 
 export class UsuarioService extends BaseService{
 
-    private baseURL: string;
-    public user: Usuario;    
+    
+    public user: Usuario; 
 
-    //Cabeçalho e corpo HTML.
-    private headers = new HttpHeaders().set('content-type', 'application/json');
-    private body: any;
+    
 
     constructor(
         private http: HttpClient) {
