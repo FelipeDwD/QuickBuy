@@ -20,6 +20,18 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(200);
 
+            builder
+                .HasMany(cp => cp.Produtos)
+                .WithOne(p => p.CategoriaProduto)
+                .HasForeignKey(p => p.CategoriaProdutoId);
+
+            builder
+                .HasMany(cp => cp.SubCategoriaProdutos)
+                .WithOne(scp => scp.CategoriaProduto)
+                .HasForeignKey(scp => scp.CategoriaProdutoId);
+
+           
+
             builder.ToTable("CategoriaProduto");
         }
     }

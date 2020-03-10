@@ -48,6 +48,10 @@ namespace Dwd.Lab.Repositorio.Map
                 .WithOne(p => p.Endereco)
                 .HasForeignKey(p => p.EnderecoId);
 
+           
+
+
+
             builder.ToTable("Endereco");
 
 

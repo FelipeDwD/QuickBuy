@@ -26,7 +26,7 @@ export class CategoriaProdutoFormComponent implements OnInit {
     this.categoriaProdutoService.cadastrarCategoria(this.categoriaProduto)
     .subscribe(
       ok => {
-
+        this.route.navigate(['/categoria-produto-main']);
       },
       err => {
 

@@ -9,8 +9,10 @@ namespace Dwd.Lab.Dominio.Entidades
         public int EnderecoId { get; set; }
         public string RazaoSocialNome { get; set; }
         public DateTime DataNascimento { get; set; }
+        public string Email { get; set; }
         public virtual ICollection<Telefone> Telefones { get; set; }
         public virtual Endereco Endereco { get; set; }
+        public int PessoaTipo { get; set; }
 
     }
 }

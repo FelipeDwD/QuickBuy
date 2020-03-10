@@ -25,10 +25,13 @@ export class CategoriaProdutoService extends BaseService{
 
    public cadastrarCategoria(categoriaProduto: CategoriaProduto): Observable<CategoriaProduto>{
        this.buildBody(categoriaProduto);
-       this.baseURL = `${this.baseURL}/categoriaProduto`
-       return this.http.put<CategoriaProduto>(this.baseURL, this.body, {headers: this.headers});
+       this.baseURL = `${this.urlApi}/categoriaProduto`
+       return this.http.post<CategoriaProduto>(this.baseURL, this.body, {headers: this.headers});
+   }
 
-
+   public retornarTodos():Observable<CategoriaProduto[]>{
+       this.baseURL = `${this.urlApi}/categoriaProduto`
+       return this.http.get<CategoriaProduto[]>(this.baseURL, {headers: this.headers});
    }
 
 

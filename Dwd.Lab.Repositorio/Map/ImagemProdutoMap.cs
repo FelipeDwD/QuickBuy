@@ -18,10 +18,7 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(60);
 
-            builder
-                .HasOne(i => i.Produto)
-                .WithMany(p => p.ImagemProduto)
-                .HasForeignKey(i => i.ProdutoId);
+          
 
             builder.ToTable("ImagemProduto");
         }

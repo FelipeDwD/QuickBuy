@@ -10,7 +10,7 @@ import { Observable } from "rxjs";
 })
 
 export class ImagemService extends BaseService{
-    private baseURL: string;
+    
 
     
     constructor(private http: HttpClient) {

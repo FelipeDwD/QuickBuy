@@ -26,6 +26,16 @@ namespace Dwd.Lab.Repositorio.Map
                 .Property(p => p.DataNascimento)
                 .IsRequired();
 
+            builder
+                .Property(p => p.Email)
+                .HasMaxLength(40)
+                .IsRequired();
+
+            builder
+                .HasMany(p => p.Telefones)
+                .WithOne(t => t.Pessoa)
+                .HasForeignKey(t => t.PessoaId);
+
             builder.ToTable("Pessoa");
         }
     }

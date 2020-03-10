@@ -15,7 +15,7 @@ namespace Dwd.Lab.Repositorio.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -149,18 +149,26 @@ namespace Dwd.Lab.Repositorio.Migrations
 
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<int>("EnderecoId")
-                        .HasMaxLength(5);
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("EnderecoId");
+
+                    b.Property<int>("PessoaTipo");
 
                     b.Property<string>("RazaoSocialNome")
                         .IsRequired()
-                        .HasMaxLength(150);
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
 
                     b.ToTable("Pessoa");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Pessoa");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Produto", b =>
@@ -168,6 +176,12 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoriaProdutoId");
+
+                    b.Property<string>("CodigoLoja")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -180,9 +194,37 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.Property<double>("Preco")
                         .HasMaxLength(12);
 
+                    b.Property<int?>("SubCategoriaProdutoId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaProdutoId");
+
+                    b.HasIndex("SubCategoriaProdutoId");
+
                     b.ToTable("Produto");
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.SubCategoriaProduto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoriaProdutoId");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaProdutoId");
+
+                    b.ToTable("SubCategoriaProduto");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Telefone", b =>
@@ -191,9 +233,11 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Numero");
+                    b.Property<string>("Numero")
+                        .IsRequired()
+                        .HasMaxLength(30);
 
-                    b.Property<int?>("PessoaId");
+                    b.Property<int>("PessoaId");
 
                     b.HasKey("Id");
 
@@ -268,10 +312,23 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.ToTable("FormaPagamento");
                 });
 
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Fornecedor", b =>
+                {
+                    b.HasBaseType("Dwd.Lab.Dominio.Entidades.Pessoa");
+
+                    b.Property<string>("RepresentanteComercialNome")
+                        .IsRequired()
+                        .HasMaxLength(30);
+
+                    b.ToTable("Fornecedor");
+
+                    b.HasDiscriminator().HasValue("Fornecedor");
+                });
+
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.ImagemProduto", b =>
                 {
                     b.HasOne("Dwd.Lab.Dominio.Entidades.Produto", "Produto")
-                        .WithMany("ImagemProduto")
+                        .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -310,11 +367,32 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Produto", b =>
+                {
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.CategoriaProduto", "CategoriaProduto")
+                        .WithMany("Produtos")
+                        .HasForeignKey("CategoriaProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.SubCategoriaProduto", "SubCategoriaProduto")
+                        .WithMany("Produtos")
+                        .HasForeignKey("SubCategoriaProdutoId");
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.SubCategoriaProduto", b =>
+                {
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.CategoriaProduto", "CategoriaProduto")
+                        .WithMany("SubCategoriaProdutos")
+                        .HasForeignKey("CategoriaProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.Telefone", b =>
                 {
-                    b.HasOne("Dwd.Lab.Dominio.Entidades.Pessoa")
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Pessoa", "Pessoa")
                         .WithMany("Telefones")
-                        .HasForeignKey("PessoaId");
+                        .HasForeignKey("PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -31,5 +31,23 @@ namespace Dwd.Lab.Web.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetSelectList()
+        {
+            try
+            {
+                var items = this._categoriaProdutoRepositorio.RetornarTodos();
+
+                if (items != null)
+                    return Ok(items);
+
+                return BadRequest("Nenhuma categoria encontrada");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+            }
+        }
+
     }
 }

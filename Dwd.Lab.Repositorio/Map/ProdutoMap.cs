@@ -13,6 +13,12 @@ namespace Dwd.Lab.Repositorio.Map
             builder.HasKey(p => p.Id);
 
             builder
+                .Property(p => p.CodigoLoja)
+                .IsRequired()
+                .HasMaxLength(20);
+                
+
+            builder
                 .Property(p => p.Nome)
                 .IsRequired()
                 .HasMaxLength(20);
@@ -25,13 +31,9 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(p => p.Preco)
                 .IsRequired()
-                .HasMaxLength(12);
-
-            builder
-                 .HasMany(p => p.ImagemProduto)
-                 .WithOne(i => i.Produto);
-
-            builder.ToTable("Produto");
+                .HasMaxLength(12);       
+                
+                builder.ToTable("Produto");
         }
     }
 }

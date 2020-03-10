@@ -10,6 +10,7 @@ export class FormComponent implements OnInit {
 
   protected ativarSpinner: boolean;
   protected mensagemValidacao: string = "";     
+  protected items = [];
 
   constructor() { }
 
