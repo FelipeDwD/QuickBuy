@@ -41,19 +41,9 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(e => e.Cep)
                 .IsRequired()
-                .HasMaxLength(12);
+                .HasMaxLength(12);         
 
-            builder
-                .HasMany(e => e.Pessoas)
-                .WithOne(p => p.Endereco)
-                .HasForeignKey(p => p.EnderecoId);
-
-           
-
-
-
-            builder.ToTable("Endereco");
-
+         builder.ToTable("Endereco");
 
         }
     }

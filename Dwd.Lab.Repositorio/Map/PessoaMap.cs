@@ -10,12 +10,7 @@ namespace Dwd.Lab.Repositorio.Map
         {
             //Padrão fluent
 
-            builder.HasKey(p => p.Id);
-
-            builder
-                .Property(p => p.EnderecoId)
-                .HasMaxLength(5)
-                .IsRequired();
+            builder.HasKey(p => p.Id);           
 
             builder
                 .Property(p => p.RazaoSocialNome)

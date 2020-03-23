@@ -17,8 +17,7 @@ namespace Dwd.Lab.Dominio.Entidades
         ///  Endereço poder ter nenhum ou vários pedidos
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
-
-        public virtual ICollection<Pessoa> Pessoas { get; set; }
+        
         
         
 
