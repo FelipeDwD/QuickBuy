@@ -10,25 +10,7 @@ namespace Dwd.Lab.Repositorio.Map
         {
             //Padrão fluent
 
-            builder.HasKey(p => p.Id);           
-
-            builder
-                .Property(p => p.RazaoSocialNome)
-                .HasMaxLength(150)
-                .IsRequired();
-
-            builder
-                .Property(p => p.DataNascimento)
-                .IsRequired();
-
-            builder
-                .Property(p => p.DataCadastro)
-                .IsRequired();
-
-            builder
-                .Property(p => p.Imagem)
-                .IsRequired()
-                .HasMaxLength(50);
+            builder.HasKey(p => p.Id);   
 
             builder
                 .HasMany(p => p.Telefones)
@@ -36,9 +18,7 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasForeignKey(t => t.PessoaId);
 
             builder
-                .HasOne(p => p.Usuario);
-
-           
+                .HasOne(p => p.Usuario);           
 
             builder.ToTable("Pessoa");
         }

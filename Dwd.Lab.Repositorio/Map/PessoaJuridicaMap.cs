@@ -13,6 +13,16 @@ namespace Dwd.Lab.Repositorio.Map
             builder.HasKey(pj => pj.Id);
 
             builder
+                .Property(pj => pj.RazaoSocial)
+                .IsRequired()
+                .HasMaxLength(30);
+
+            builder
+                .Property(pj => pj.NomeFantasia)
+                .IsRequired()
+                .HasMaxLength(30);
+
+            builder
                 .Property(pj => pj.Cnpj)
                 .IsRequired()
                 .HasMaxLength(20);
