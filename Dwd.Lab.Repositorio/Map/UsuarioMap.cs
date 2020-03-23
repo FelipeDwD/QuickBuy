@@ -30,20 +30,7 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(u => u.Senha)
                 .IsRequired()
-                .HasMaxLength(400);
-
-            builder
-                .Property(u => u.Cpf)
-                .IsRequired()
-                .HasMaxLength(15);
-
-            builder
-                .Property(u => u.DataCadastro)
-                .IsRequired();
-
-            builder
-                .Property(u => u.Imagem)
-                .HasMaxLength(70);
+                .HasMaxLength(400);           
 
             builder
                 .Property(u => u.Sexo)

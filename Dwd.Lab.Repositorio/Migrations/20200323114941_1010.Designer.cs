@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dwd.Lab.Repositorio.Migrations
 {
     [DbContext(typeof(LabDataContext))]
-    [Migration("20200322174150_1010")]
+    [Migration("20200323114941_1010")]
     partial class _1010
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,17 +149,21 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<string>("Email");
-
                     b.Property<int>("EnderecoId");
+
+                    b.Property<string>("Imagem");
 
                     b.Property<int>("PessoaTipoId");
 
                     b.Property<string>("RazaoSocialNome");
 
                     b.Property<int>("RelacaoTipoId");
+
+                    b.Property<int>("UsuarioId");
 
                     b.HasKey("Id");
 
@@ -169,7 +173,49 @@ namespace Dwd.Lab.Repositorio.Migrations
 
                     b.HasIndex("RelacaoTipoId");
 
+                    b.HasIndex("UsuarioId");
+
                     b.ToTable("Pessoa");
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.PessoaFisica", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cpf");
+
+                    b.Property<int>("PessoaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId");
+
+                    b.ToTable("PessoaFisica");
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.PessoaJuridica", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("NomeRepresentante")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("PessoaId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId");
+
+                    b.ToTable("PessoaJuridica");
                 });
 
             modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.PessoaTipo", b =>
@@ -286,18 +332,9 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)))
                         .HasColumnType("char");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasMaxLength(15);
-
-                    b.Property<DateTime>("DataCadastro");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(45);
-
-                    b.Property<string>("Imagem")
-                        .HasMaxLength(70);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -390,6 +427,27 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.HasOne("Dwd.Lab.Dominio.Entidades.RelacaoTipo", "RelacaoTipo")
                         .WithMany()
                         .HasForeignKey("RelacaoTipoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.PessoaFisica", b =>
+                {
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Pessoa", "Pessoa")
+                        .WithMany()
+                        .HasForeignKey("PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Dwd.Lab.Dominio.Entidades.PessoaJuridica", b =>
+                {
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Pessoa", "Pessoa")
+                        .WithMany()
+                        .HasForeignKey("PessoaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

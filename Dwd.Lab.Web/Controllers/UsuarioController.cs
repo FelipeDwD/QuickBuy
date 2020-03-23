@@ -59,19 +59,11 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                var usuarioReturn = this._usuarioRepositorio.GetByCredenciais(usuario.Email, usuario.Senha);
-                if (usuarioReturn != null)
-                {
-                    var ativo = this._usuarioRepositorio.Ativo(usuarioReturn.Cpf);
-                    if (ativo)
-                        return Ok(usuarioReturn);
-
-                    return BadRequest("Usuário bloqueado.");
-                }
 
 
 
-                return BadRequest("Usuário ou senha inválido");
+
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -92,7 +84,7 @@ namespace Dwd.Lab.Web.Controllers
                 foreach (Usuario u in usuarios)
                 {
                     u.Ativo = true;
-                    u.DataCadastro = DateTime.Now;
+                    
                     this._usuarioRepositorio.Adicionar(u);
                 }
                 return Ok();
@@ -109,27 +101,7 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                var verificarEmail = this._usuarioRepositorio.VerificarEmail(usuario.Email);
-                var verificarCpf = this._usuarioRepositorio.VerificarCpf(usuario.Cpf);
-
-                if (!verificarEmail)
-                {
-                    if (!verificarCpf)
-                    {
-                        usuario.DataCadastro = DateTime.Now;
-                        usuario.Ativo = true;
-                        this._usuarioRepositorio.Adicionar(usuario);
-                        return Created("api/usuario", usuario);
-                    }
-                    else
-                    {
-                        return BadRequest("Já temos um usuário com esse CPF.");
-                    }
-                }
-                else
-                {
-                    return BadRequest("Já temos um usuário com esse e-mail");
-                }
+                return Ok();
 
             }
             catch (Exception ex)
@@ -174,55 +146,7 @@ namespace Dwd.Lab.Web.Controllers
         {
             try
             {
-                bool editOk = false;
-
-                var emailIsOfUser = this._usuarioRepositorio
-                    .VerificarEmail(usuario.Id, usuario.Email);
-
-                var cpfIsOfUser = this._usuarioRepositorio
-                                  .VerificarCpf(usuario.Id, usuario.Cpf);
-
-                if (emailIsOfUser && cpfIsOfUser)
-                {
-                    this._usuarioRepositorio
-                         .Atualizar(usuario);
-                    return Ok(usuario);
-                }
-                else
-                {
-                    if (!cpfIsOfUser)
-                    {
-                        var existeCpf = this._usuarioRepositorio
-                            .VerificarCpf(usuario.Cpf);
-
-                        if (existeCpf)
-                            return BadRequest("Já temos um usuário com esse CPF.");
-
-                        editOk = true;
-                    }
-
-                    if (!emailIsOfUser)
-                    {
-                        var existeEmail = this._usuarioRepositorio
-                            .VerificarEmail(usuario.Email);
-
-                        if (existeEmail)
-                            return BadRequest("Já temos um usuário com esse e-mail");
-
-                        editOk = true;
-
-                    }
-                }
-
-                if (editOk)
-                    this._usuarioRepositorio
-                         .Atualizar(usuario);
-                return Ok(usuario);
-
-
-
-
-
+                return Ok();
             }
             catch (Exception ex)
             {

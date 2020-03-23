@@ -27,14 +27,21 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired();
 
             builder
-                .Property(p => p.Email)
-                .HasMaxLength(40)
+                .Property(p => p.DataCadastro)
                 .IsRequired();
+
+            builder
+                .Property(p => p.Imagem)
+                .IsRequired()
+                .HasMaxLength(50);
 
             builder
                 .HasMany(p => p.Telefones)
                 .WithOne(t => t.Pessoa)
                 .HasForeignKey(t => t.PessoaId);
+
+            builder
+                .HasOne(p => p.Usuario);
 
            
 

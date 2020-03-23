@@ -147,17 +147,21 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataCadastro");
+
                     b.Property<DateTime>("DataNascimento");
 
-                    b.Property<string>("Email");
-
                     b.Property<int>("EnderecoId");
+
+                    b.Property<string>("Imagem");
 
                     b.Property<int>("PessoaTipoId");
 
                     b.Property<string>("RazaoSocialNome");
 
                     b.Property<int>("RelacaoTipoId");
+
+                    b.Property<int>("UsuarioId");
 
                     b.HasKey("Id");
 
@@ -166,6 +170,8 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.HasIndex("PessoaTipoId");
 
                     b.HasIndex("RelacaoTipoId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pessoa");
                 });
@@ -324,18 +330,9 @@ namespace Dwd.Lab.Repositorio.Migrations
                         .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)))
                         .HasColumnType("char");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasMaxLength(15);
-
-                    b.Property<DateTime>("DataCadastro");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(45);
-
-                    b.Property<string>("Imagem")
-                        .HasMaxLength(70);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -428,6 +425,11 @@ namespace Dwd.Lab.Repositorio.Migrations
                     b.HasOne("Dwd.Lab.Dominio.Entidades.RelacaoTipo", "RelacaoTipo")
                         .WithMany()
                         .HasForeignKey("RelacaoTipoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Dwd.Lab.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
