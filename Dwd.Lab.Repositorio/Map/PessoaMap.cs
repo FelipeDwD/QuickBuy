@@ -36,6 +36,8 @@ namespace Dwd.Lab.Repositorio.Map
                 .WithOne(t => t.Pessoa)
                 .HasForeignKey(t => t.PessoaId);
 
+           
+
             builder.ToTable("Pessoa");
         }
     }

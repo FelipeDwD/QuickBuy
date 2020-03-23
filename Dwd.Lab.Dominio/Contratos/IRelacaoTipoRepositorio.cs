@@ -2,7 +2,7 @@
 
 namespace Dwd.Lab.Dominio.Contratos
 {
-    public interface IFornecedorRepositorio : IBaseRepositorio<Fornecedor>
+    public interface IRelacaoTipoRepositorio : IBaseRepositorio<RelacaoTipo>
     {
     }
 }

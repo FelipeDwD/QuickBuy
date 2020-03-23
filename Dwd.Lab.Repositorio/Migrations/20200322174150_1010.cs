@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Dwd.Lab.Repositorio.Migrations
 {
-    public partial class _20200310 : Migration
+    public partial class _1010 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,6 +52,32 @@ namespace Dwd.Lab.Repositorio.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FormaPagamento", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PessoaTipo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Tipo = table.Column<string>(maxLength: 30, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PessoaTipo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RelacaoTipo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Descricao = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RelacaoTipo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,12 +129,11 @@ namespace Dwd.Lab.Repositorio.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EnderecoId = table.Column<int>(nullable: false),
-                    RazaoSocialNome = table.Column<string>(maxLength: 50, nullable: false),
+                    RelacaoTipoId = table.Column<int>(nullable: false),
+                    PessoaTipoId = table.Column<int>(nullable: false),
+                    RazaoSocialNome = table.Column<string>(nullable: true),
                     DataNascimento = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    PessoaTipo = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    RepresentanteComercialNome = table.Column<string>(maxLength: 30, nullable: true)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,6 +142,18 @@ namespace Dwd.Lab.Repositorio.Migrations
                         name: "FK_Pessoa_Endereco_EnderecoId",
                         column: x => x.EnderecoId,
                         principalTable: "Endereco",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pessoa_PessoaTipo_PessoaTipoId",
+                        column: x => x.PessoaTipoId,
+                        principalTable: "PessoaTipo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pessoa_RelacaoTipo_RelacaoTipoId",
+                        column: x => x.RelacaoTipoId,
+                        principalTable: "RelacaoTipo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -278,6 +315,16 @@ namespace Dwd.Lab.Repositorio.Migrations
                 column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pessoa_PessoaTipoId",
+                table: "Pessoa",
+                column: "PessoaTipoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pessoa_RelacaoTipoId",
+                table: "Pessoa",
+                column: "RelacaoTipoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Produto_CategoriaProdutoId",
                 table: "Produto",
                 column: "CategoriaProdutoId");
@@ -329,6 +376,12 @@ namespace Dwd.Lab.Repositorio.Migrations
 
             migrationBuilder.DropTable(
                 name: "Endereco");
+
+            migrationBuilder.DropTable(
+                name: "PessoaTipo");
+
+            migrationBuilder.DropTable(
+                name: "RelacaoTipo");
 
             migrationBuilder.DropTable(
                 name: "CategoriaProduto");

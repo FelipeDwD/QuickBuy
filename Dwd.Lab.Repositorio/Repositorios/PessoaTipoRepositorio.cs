@@ -4,9 +4,9 @@ using Dwd.Lab.Repositorio.Contexto;
 
 namespace Dwd.Lab.Repositorio.Repositorios
 {
-    public class FornecedorRepositorio : BaseRepositorio<Fornecedor>, IFornecedorRepositorio
+    public class PessoaTipoRepositorio : BaseRepositorio<PessoaTipo>, IPessoaTipoRepositorio
     {
-        public FornecedorRepositorio(LabDataContext labDataContext) : base(labDataContext)
+        public PessoaTipoRepositorio(LabDataContext labDataContext) : base(labDataContext)
         {
         }
     }
