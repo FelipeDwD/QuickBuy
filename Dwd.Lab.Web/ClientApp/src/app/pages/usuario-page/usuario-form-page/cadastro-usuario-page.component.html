@@ -12,7 +12,17 @@
       <label for="senha1">Senha:</label>
       <input type="password" class="form-control" name="senha1" id="senha1" placeholder="Repita a senha" style="margin-bottom: 3%;">
 
-      <p>Selecione sua imagem de perfil:</p>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="pessoaJuridica" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
+        <label class="custom-control-label" for="pessoaJuridica">Pessoa Física</label>                
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input type="radio" id="pessoaFisica" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
+        <label class="custom-control-label" for="pessoaFisica">Pessoa Jurídica</label>                
+      </div>
+      
+
+      <p style="margin-top: 3%;">Selecione sua imagem de perfil:</p>
       <div class="custom-file">        
         <input type="file" class="custom-file-input" id="inputGroupFile04" (change)="inputChange($event.target.files)" placeholder="Perfil">
         <label class="custom-file-label" for="inputGroupFile04"> Buscar </label>

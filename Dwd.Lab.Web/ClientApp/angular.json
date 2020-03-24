@@ -145,5 +145,8 @@
       }
     }
   },
-  "defaultProject": "Dwd.Lab.Web"
+  "defaultProject": "Dwd.Lab.Web",
+  "cli": {
+    "analytics": "df1a0d3f-02f9-47b1-96f9-0b15c3116fcb"
+  }
 }

@@ -1,0 +1,42 @@
+<div class="form-group">
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="nome">Nome:</label>
+    <input type="text" class="form-control" name="nome" id="nome" placeholder="Seu primeiro nome">
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="sobrenome">Sobrenome:</label>
+    <input type="text" class="form-control" name="sobrenome" id="sobrenome" placeholder="Seu sobrenome">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 mb-3">
+    <label for="cpf">C.P.F:</label>
+    <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Informe seu C.P.F.">
+  </div>
+  
+  <div class="col-md-4 mb-3">
+    <p>Sexo:</p>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="masculino" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
+      <label class="custom-control-label" for="pessoaJuridica">Masculino</label>                
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" id="feminino" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
+      <label class="custom-control-label" for="pessoaFisica">Feminino</label>                
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-3">
+    <p>Data de Nascimento:</p>
+    <div class="input-group">      
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [(ngModel)]="model" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>  
+
+</div>
+</div>

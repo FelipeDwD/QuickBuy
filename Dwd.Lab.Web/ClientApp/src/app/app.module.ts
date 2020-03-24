@@ -22,6 +22,10 @@ import { ImagemService } from './services/imagem/imagemUsuario.service';
 import { CategoriaProdutoMainComponent } from './pages/categoria-produto-page/categoria-produto-main/categoria-produto-main.component';
 import { CategoriaProdutoFormComponent } from './pages/categoria-produto-page/categoria-produto-form/categoria-produto-form.component';
 import { CategoriaProdutoGridComponent } from './pages/categoria-produto-page/categoria-produto-grid/categoria-produto-grid.component';
+import { PessoaFisicaFormPageComponent } from './pages/pessoa-fisica-page/pessoa-fisica-form-page/pessoa-fisica-form-page.component';
+import { PessoaFisicaGridPageComponent } from './pages/pessoa-fisica-page/pessoa-fisica-grid-page/pessoa-fisica-grid-page.component';
+import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -40,11 +44,15 @@ import { CategoriaProdutoGridComponent } from './pages/categoria-produto-page/ca
     ProdutoFormPageComponent,    
     CategoriaProdutoMainComponent,
     CategoriaProdutoFormComponent,
-    CategoriaProdutoGridComponent,   
-  ],
+    CategoriaProdutoGridComponent,
+    PessoaFisicaFormPageComponent,
+    PessoaFisicaGridPageComponent,    
+    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    NgbDatepickerModule,
+    NgbModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, canActivate:[GuardaRotas], pathMatch: 'full' },      
@@ -57,7 +65,8 @@ import { CategoriaProdutoGridComponent } from './pages/categoria-produto-page/ca
       { path: 'usuario-grid', component: UsuarioGridPageComponent, canActivate: [GuardaRotas]},
       { path: 'categoria-produto-main', component: CategoriaProdutoMainComponent},
       { path: 'categoria-produto-form', component: CategoriaProdutoFormComponent},
-      { path: 'categoria-produto-grid', component: CategoriaProdutoGridComponent} 
+      { path: 'categoria-produto-grid', component: CategoriaProdutoGridComponent}, 
+      { path: 'pessoa-fisica-form', component: PessoaFisicaFormPageComponent}
     ])
   ],
   providers: [UsuarioService,
