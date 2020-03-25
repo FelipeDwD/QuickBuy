@@ -1,0 +1,32 @@
+<div class="form-group">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+        <label for="nomeFantasia">Nome Fantasia:</label>
+        <input type="text" class="form-control" name="nomeFantasia" id="nomeFantasia" placeholder="Informe o nome fantasia">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="razaoSocial">Razão Social:</label>
+        <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" placeholder="Informe a razão social">
+    </div>    
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+        <label for="cnpj">C.N.P.J.:</label>
+        <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="Informe o C.N.P.J"
+        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+        maxlength="14">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="representanteComercial">Representante Comercial:</label>
+        <input type="text" class="form-control" name="representanteComercial" id="representanteComercial" placeholder="Nos informe um nome para contato dessa empresa">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+        <button class="btn btn-dark btn-block">Voltar</button>
+    </div>
+    <div class="col-md-6 mb-3">
+        <button class="btn btn-info btn-block">Próximo</button>
+    </div>  
+  </div>
+</div>

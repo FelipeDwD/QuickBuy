@@ -25,6 +25,9 @@
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
             <a class="nav-link text-dark" [routerLink]='["/pessoa-fisica-form"]'>Pessoa Física</a>
           </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/pessoa-juridica-form"]'>Pessoa Jurídica</a>
+          </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
             <a class="nav-item nav-link text-dark" [routerLink]='[""]' (click)="logout()">Sair</a>
           </li>         

@@ -25,6 +25,8 @@ import { CategoriaProdutoGridComponent } from './pages/categoria-produto-page/ca
 import { PessoaFisicaFormPageComponent } from './pages/pessoa-fisica-page/pessoa-fisica-form-page/pessoa-fisica-form-page.component';
 import { PessoaFisicaGridPageComponent } from './pages/pessoa-fisica-page/pessoa-fisica-grid-page/pessoa-fisica-grid-page.component';
 import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PessoaJuridicaFormPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-form-page/pessoa-juridica-form-page.component';
+import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-grid-page/pessoa-juridica-grid-page.component';
 
 
 
@@ -46,7 +48,9 @@ import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-
     CategoriaProdutoFormComponent,
     CategoriaProdutoGridComponent,
     PessoaFisicaFormPageComponent,
-    PessoaFisicaGridPageComponent,    
+    PessoaFisicaGridPageComponent,
+    PessoaJuridicaFormPageComponent,
+    PessoaJuridicaGridPageComponent,    
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -66,7 +70,8 @@ import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-
       { path: 'categoria-produto-main', component: CategoriaProdutoMainComponent},
       { path: 'categoria-produto-form', component: CategoriaProdutoFormComponent},
       { path: 'categoria-produto-grid', component: CategoriaProdutoGridComponent}, 
-      { path: 'pessoa-fisica-form', component: PessoaFisicaFormPageComponent}
+      { path: 'pessoa-fisica-form', component: PessoaFisicaFormPageComponent},
+      { path: 'pessoa-juridica-form', component: PessoaJuridicaFormPageComponent}
     ])
   ],
   providers: [UsuarioService,

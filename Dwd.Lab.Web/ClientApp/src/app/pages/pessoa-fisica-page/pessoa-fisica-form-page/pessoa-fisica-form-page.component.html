@@ -12,31 +12,42 @@
 <div class="row">
   <div class="col-md-4 mb-3">
     <label for="cpf">C.P.F:</label>
-    <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Informe seu C.P.F.">
+    <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Informe seu C.P.F."
+    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+    maxlength="11">
   </div>
   
   <div class="col-md-4 mb-3">
     <p>Sexo:</p>
     <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" id="masculino" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
-      <label class="custom-control-label" for="pessoaJuridica">Masculino</label>                
+      <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline1">Masculino</label>
     </div>
     <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" id="feminino" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
-      <label class="custom-control-label" for="pessoaFisica">Feminino</label>                
+      <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+      <label class="custom-control-label" for="customRadioInline2">Feminino</label>
     </div>
   </div>
 
   <div class="col-md-4 mb-3">
     <p>Data de Nascimento:</p>
-    <div class="input-group">      
-      <input class="form-control" placeholder="yyyy-mm-dd"
-             name="dp" [(ngModel)]="model" ngbDatepicker [footerTemplate]="footerTemplate" #d="ngbDatepicker">
+    <div class="input-group">
+      <input class="form-control" placeholder="dd/mm/yyyy"
+             name="d2"  ngbDatepicker #d2="ngbDatepicker">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button">Selecione</button>
       </div>
     </div>
   </div>  
 
+</div>
+
+<div class="row"> 
+  <div class="col-md-6 mb-3">
+    <button class="btn btn-dark btn-block">Voltar</button>
+  </div>
+  <div class="col-md-6 mb-3">
+    <button class="btn btn-info btn-block">Próximo</button>
+  </div>
 </div>
 </div>
