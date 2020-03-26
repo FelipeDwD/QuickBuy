@@ -12,6 +12,12 @@ namespace Dwd.Lab.Repositorio.Map
 
             builder.HasKey(e => e.Id);
 
+
+            builder
+                .Property(e => e.Sigla)
+                .IsRequired()
+                .HasMaxLength(2);
+
             builder
                 .Property(e => e.Nome)
                 .IsRequired()
