@@ -27,6 +27,7 @@ import { PessoaFisicaGridPageComponent } from './pages/pessoa-fisica-page/pessoa
 import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PessoaJuridicaFormPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-form-page/pessoa-juridica-form-page.component';
 import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-grid-page/pessoa-juridica-grid-page.component';
+import { EnderecoFormPageComponent } from './pages/endereco-page/endereco-form-page/endereco-form-page.component';
 
 
 
@@ -51,6 +52,7 @@ import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pe
     PessoaFisicaGridPageComponent,
     PessoaJuridicaFormPageComponent,
     PessoaJuridicaGridPageComponent,    
+    EnderecoFormPageComponent,    
     ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -71,7 +73,8 @@ import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pe
       { path: 'categoria-produto-form', component: CategoriaProdutoFormComponent},
       { path: 'categoria-produto-grid', component: CategoriaProdutoGridComponent}, 
       { path: 'pessoa-fisica-form', component: PessoaFisicaFormPageComponent},
-      { path: 'pessoa-juridica-form', component: PessoaJuridicaFormPageComponent}
+      { path: 'pessoa-juridica-form', component: PessoaJuridicaFormPageComponent},
+      { path: 'endereco-form', component: EnderecoFormPageComponent}
     ])
   ],
   providers: [UsuarioService,
