@@ -62,6 +62,7 @@ namespace Dwd.Lab.Web
             services.AddScoped<IImagem, Imagem>();
             services.AddScoped<ICategoriaProdutoRepositorio, CategoriaProdutoRepositorio>();
             services.AddScoped<IEstadoRepositorio, EstadoRepositorio>();
+            services.AddScoped<ICidadeRepositorio, CidadeRepositorio>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
