@@ -29,14 +29,10 @@ namespace Dwd.Lab.Repositorio.Map
                 .HasMaxLength(12);
 
             builder
-                .Property(e => e.Cidade)
-                .IsRequired()
-                .HasMaxLength(8);
+                .HasOne(e => e.Cidade);
 
             builder
-                .Property(e => e.Estado)
-                .IsRequired()
-                .HasMaxLength(10);
+                .HasOne(e => e.Estado);            
 
             builder
                 .Property(e => e.Cep)

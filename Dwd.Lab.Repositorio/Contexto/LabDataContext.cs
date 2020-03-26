@@ -22,6 +22,8 @@ namespace Dwd.Lab.Repositorio.Contexto
         public DbSet<PessoaFisica> PessoaFisica { get; set; }
         public DbSet<PessoaJuridica> PessoaJuridica { get; set; }
         public DbSet<EnderecoPessoa> EnderecoPessoa { get; set; }
+        public DbSet<Estado> Estado { get; set; }
+        public DbSet<Cidade> Cidade { get; set; }
 
         public LabDataContext(DbContextOptions<LabDataContext> options) : base(options)
         {
@@ -47,6 +49,8 @@ namespace Dwd.Lab.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new PessoaFisicaMap());
             modelBuilder.ApplyConfiguration(new PessoaJuridicaMap());
             modelBuilder.ApplyConfiguration(new EnderecoPessoaMap());
+            modelBuilder.ApplyConfiguration(new EstadoMap());
+            modelBuilder.ApplyConfiguration(new CidadeMap());
         }
     }
 }
