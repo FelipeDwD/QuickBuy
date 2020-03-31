@@ -16,7 +16,7 @@ namespace Dwd.Lab.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetSelectList()
         {
             try
             {
@@ -43,5 +43,9 @@ namespace Dwd.Lab.Web.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+
+        
+
+
     }
 }

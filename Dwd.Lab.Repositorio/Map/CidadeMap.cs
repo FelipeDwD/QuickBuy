@@ -15,10 +15,10 @@ namespace Dwd.Lab.Repositorio.Map
             builder
                 .Property(c => c.Nome);
 
-            builder
-                .HasOne(c => c.Estado)
-                .WithMany(e => e.Cidades)
-                .HasForeignKey(c => c.EstadoId);
+            //builder
+            //    .HasOne(c => c.Estado)
+            //    .WithMany(e => e.Cidades)
+            //    .HasForeignKey(c => c.EstadoId);
 
             builder.ToTable("Cidade");
         }

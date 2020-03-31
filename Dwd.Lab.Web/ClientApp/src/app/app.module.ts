@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgSelectOption } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -28,7 +28,7 @@ import { NgbDatepicker, NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-
 import { PessoaJuridicaFormPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-form-page/pessoa-juridica-form-page.component';
 import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-grid-page/pessoa-juridica-grid-page.component';
 import { EnderecoFormPageComponent } from './pages/endereco-page/endereco-form-page/endereco-form-page.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { EnderecoFormPageComponent } from './pages/endereco-page/endereco-form-p
     HttpClientModule,
     NgbDatepickerModule,
     NgbModule,
+    NgSelectModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, canActivate:[GuardaRotas], pathMatch: 'full' },      

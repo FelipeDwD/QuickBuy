@@ -18,31 +18,33 @@
     <div class="row">
         <div class="col-md-3 mb-3">
             <label for="estado">Estado:</label>
-            <select class="form-control">
-                <option>Example 1</option>
-                <option>Example 2</option>
-                <option>Example 3</option>
+            <select name="estado" 
+            id="estado" 
+            class="form-control"
+            (change)="getSelectListByIdEstado($event.target.value)">
+                <option *ngFor="let item of items" [value]="item.id"> {{ item.nome }} </option>
             </select>
         </div>
         <div class="col-md-3 mb-3">
             <label for="cidade">Cidade:</label>
-            <select class="form-control">
-                <option>Example 1</option>
-                <option>Example 2</option>
-                <option>Example 3</option>
+            <select name="cidade"
+            id="cidade"
+            class="form-control"
+            >
+             <option *ngFor="let item1 of items1" [value]="item1.id"> {{item1.nome}} </option>   
             </select>
         </div>
         <div class="col-md-3 mb-3">
             <label for="bairro">Bairro:</label>
-            <select class="form-control">
-                <option>Example 1</option>
-                <option>Example 2</option>
-                <option>Example 3</option>
-            </select>
+            <input type="text" class="form-control" name="bairro" id="bairro"
+            placeholder="Informe seu bairro"
+            >
         </div>
         <div class="col-md-3 mb-3">
             <label for="cep">C.E.P.:</label>
-            <input type="text" class="form-control" name="cep" id="cep" placeholder="Informe seu C.E.P.">
+            <input type="text" class="form-control" name="cep" id="cep" 
+            placeholder="Informe seu C.E.P."
+            onkeypress="return event.charCode >= 48 && event.charCode <= 57">
         </div>
     </div>
     <div class="row">   

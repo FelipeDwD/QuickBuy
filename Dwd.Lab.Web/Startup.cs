@@ -1,13 +1,13 @@
+using AutoMapper;
 using Dwd.Lab.Dominio.Contratos;
 using Dwd.Lab.Dominio.Entidades;
 using Dwd.Lab.Repositorio.Contexto;
 using Dwd.Lab.Repositorio.Repositorios;
+using Dwd.Lab.Web.AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +19,7 @@ namespace Dwd.Lab.Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+
         }
 
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -46,7 +46,11 @@ namespace Dwd.Lab.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-           
+
+
+            AutoMapperConfiguration.RegisterMappings();
+            services.AddAutoMapper();
+
             services.AddDbContext<LabDataContext>(option =>
                                                     option.UseLazyLoadingProxies()
                                                     .UseSqlServer(Configuration.GetConnectionString("DwdLab")));
@@ -58,7 +62,7 @@ namespace Dwd.Lab.Web
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IFormaPagamentoRepositorio, FormaPagamentoRepositorio>();
-            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();            
+            services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
             services.AddScoped<IImagem, Imagem>();
             services.AddScoped<ICategoriaProdutoRepositorio, CategoriaProdutoRepositorio>();
             services.AddScoped<IEstadoRepositorio, EstadoRepositorio>();

@@ -23,10 +23,10 @@ namespace Dwd.Lab.Repositorio.Map
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder
-                .HasMany(e => e.Cidades)
-                .WithOne(c => c.Estado)
-                .HasForeignKey(c => c.EstadoId);
+            //builder
+            //    .HasMany(e => e.Cidades)
+            //    .WithOne(c => c.Estado)
+            //    .HasForeignKey(c => c.EstadoId);
 
             builder.ToTable("Estado");
         }

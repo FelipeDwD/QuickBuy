@@ -7,5 +7,6 @@ namespace Dwd.Lab.Dominio.Contratos
 {
     public interface ICidadeRepositorio : IBaseRepositorio<Cidade>
     {
+        List<Cidade> GetSelectListByIdEstado(int estadoId);
     }
 }
