@@ -20,9 +20,10 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   protected usuario: Usuario;
   protected arquivoSelecionado: File;
   protected emailConfirmado: string;
+  protected senhaEspelho : any;
   
-  protected sexoMasculino: boolean;
-  protected isEdit: boolean;
+  
+ 
  
 
   constructor(private router: Router,
@@ -32,100 +33,11 @@ export class CadastroUsuarioPageComponent extends FormComponent implements OnIni
   }
 
   ngOnInit() {
-    let usuarioSession = sessionStorage.getItem('user');
-
-    if(usuarioSession){
-      this.usuario = JSON.parse(usuarioSession);   
-      this.isEdit = true; 
-      if(this.usuario.sexo == "M"){
-        this.sexoMasculino = true;
-      }
-    }else{
-      this.usuario = new Usuario();
-      this.isEdit = false;    
-    }   
+       this.usuario = new Usuario();
+       this.senhaEspelho = ''
   }
 
-  back(): void {
-    let logado = this.usuarioService.logado();
-    this.paginaAnterior = history.back();
-    
-    if (logado) {
-      this.router.navigate([this.paginaAnterior]);
-    } else {
-      this.router.navigate(['/login-usuario']);
-    }
-  }
-
-  save(): void {
-    this.ativarSpinner = true;  
-    this.verificarSexo();    
-
-    if(this.arquivoSelecionado != null){
-      this.cadastroImagem();
-    }else{
-      this.cadastrarSimples();
-    }    
-    this.ativarSpinner = false;
-   
-  }
-
-  inputChange(file: FileList): void {
-    this.arquivoSelecionado = file[0];
-  }
   
 
-  cadastroImagem(): void {
-    this.imagemService.enviarArquivo(this.arquivoSelecionado)
-      .subscribe(
-        image => {
-          this.usuario.imagem = image;
-          this.cadastrarSimples();
-        });
-  }
-
-  cadastrarSimples(): void {
-    if(this.isEdit){
-      this.usuarioService.put(this.usuario)
-      .subscribe(
-        ok => {
-          this.redirect();
-        },
-        err => {
-          this.mensagemValidacao = err.error;
-        }
-      )
-    }else{
-      this.usuarioService.post(this.usuario)
-      .subscribe(
-        ok => {
-          this.redirect();
-        },
-        err => {
-          this.mensagemValidacao = err.error;
-        });
-    }    
-  }
-
-  redirect():void{
-    let logado = this.usuarioService.logado();
-
-          if (logado) {
-            this.router.navigate(['/usuario-main']);
-          } else {
-            this.router.navigate(['/login-usuario']);
-          }
-  }
-
-  verificarSexo():void{
-    let sexo = document.getElementsByName('checkSexo') as any as HTMLInputElement;
-
-    if(sexo[0].checked){
-        this.usuario.sexo = 'M';
-        this.usuario.imagem = 'defaultM.png'        
-    }else if(sexo[1].checked){
-      this.usuario.sexo = 'F';      
-      this.usuario.imagem = 'defaultF.png'
-    }
-  }  
+  
 }

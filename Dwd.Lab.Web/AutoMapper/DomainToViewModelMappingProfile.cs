@@ -17,6 +17,7 @@ namespace Dwd.Lab.Web.AutoMapper
             // Dentro da VM referencia VM dentro do Model Referencia Model(Entidade)                     
             CreateMap<Estado, EstadoViewModel>().ReverseMap();
             CreateMap<Cidade, CidadeViewModel>().ReverseMap();
+            CreateMap<Usuario, UsuarioCadastroViewModal>().ReverseMap();
         }
     }
 }

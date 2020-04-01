@@ -37,15 +37,10 @@ export class UsuarioService extends BaseService{
 
     private buildBody(usuario: Usuario){
         this.body = {
-            id: usuario.id,
-            nome: usuario.nome,
-            sobrenome: usuario.sobrenome,
-            cpf: usuario.cpf,
+            id: usuario.id,           
             email: usuario.email,
             senha: usuario.senha,
-            imagem: usuario.imagem,
-            sexo: usuario.sexo,
-            ativo: usuario.ativo
+            imagem: usuario.imagem,            
         }
     }
     

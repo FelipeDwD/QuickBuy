@@ -29,6 +29,8 @@ import { PessoaJuridicaFormPageComponent } from './pages/pessoa-juridica-page/pe
 import { PessoaJuridicaGridPageComponent } from './pages/pessoa-juridica-page/pessoa-juridica-grid-page/pessoa-juridica-grid-page.component';
 import { EnderecoFormPageComponent } from './pages/endereco-page/endereco-form-page/endereco-form-page.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { EstadoService } from './services/estado/estado.service';
+import { CidadeService } from './services/cidade/cidade.service';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ])
   ],
   providers: [UsuarioService,
-              ImagemService],
+              ImagemService,
+              EstadoService,
+              CidadeService],
               
   bootstrap: [AppComponent]
 })

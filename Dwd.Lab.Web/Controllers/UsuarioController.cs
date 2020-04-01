@@ -1,5 +1,6 @@
 ﻿using Dwd.Lab.Dominio.Contratos;
 using Dwd.Lab.Dominio.Entidades;
+using Dwd.Lab.Web.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,136 +22,36 @@ namespace Dwd.Lab.Web.Controllers
             this._usuarioRepositorio = usuarioRepositorio;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
+       [HttpPost]
+       public ActionResult Save([FromBody] UsuarioCadastroViewModal usuarioCadastroViewModal)
+         {
             try
             {
-                var usuarios = this._usuarioRepositorio.RetornarTodos();
-                return Ok(usuarios);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
+                bool validaSenha = usuarioCadastroViewModal.Senha == usuarioCadastroViewModal.SenhaEspelho;
 
-        }
-
-        [HttpGet("getbyid")]
-        public IActionResult GetById([FromBody] Usuario usuario)
-        {
-            try
-            {
-                var user = this._usuarioRepositorio.RetornarPorId(usuario.Id);
-
-                if (user != null)
-                    return Ok(usuario);
-
-                return BadRequest("Usuário não encontrado");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
-        }
-
-        [HttpPost("login")]
-        public ActionResult Login([FromBody] Usuario usuario)
-        {
-            try
-            {
-
-
-
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.ToString());
-            }
-        }
-
-        /// <summary>
-        /// Método para laboratório, o mesmo insere vários usuários ao mesmo tempo.
-        /// </summary>
-        /// <param name="usuarios"></param>
-        /// <returns></returns>
-        [HttpPost("adicionarN")]
-        public IActionResult Adicionar([FromBody] List<Usuario> usuarios)
-        {
-            try
-            {
-                foreach (Usuario u in usuarios)
+                if (validaSenha)
                 {
-                    u.Ativo = true;
-                    
-                    this._usuarioRepositorio.Adicionar(u);
+                    Usuario usuario = new Usuario();
+
+                    usuario.Id = usuarioCadastroViewModal.Id;
+                    usuario.Senha = usuarioCadastroViewModal.Senha;
+                    usuario.Email = usuarioCadastroViewModal.Email;
+                    usuario.Imagem = usuarioCadastroViewModal.Imagem;
+                    usuario.DataCadastro = DateTime.Now;
+                    usuario.Ativo = true;
+
+                    return Ok();
                 }
-                return Ok();
+                else
+                {
+                    return BadRequest("Senhas não correspondem!");
+                }
 
+                
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return BadRequest(ex.Message.ToString());
-            }
-        }
-
-        [HttpPost("adicionar")]
-        public IActionResult Adicionar([FromBody] Usuario usuario)
-        {
-            try
-            {
-                return Ok();
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
-        }
-
-        [HttpPost("alterarStatus")]
-        public IActionResult AlterarStatus([FromBody] Usuario usuario)
-        {
-            try
-            {
-                bool ativo = usuario.Ativo ? usuario.Ativo = false : usuario.Ativo = true;
-
-                this._usuarioRepositorio.Atualizar(usuario);
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
-        }
-
-        [HttpPost("delete")]
-        public IActionResult Delete([FromBody] Usuario usuario)
-        {
-            try
-            {
-                this._usuarioRepositorio.Remover(usuario);
-                return BadRequest("Deletado");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
-            }
-        }
-
-        [HttpPut]
-        public IActionResult Put([FromBody] Usuario usuario)
-        {
-            try
-            {
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message.ToString());
+                return BadRequest(e.Message.ToString());
             }
         }
     }

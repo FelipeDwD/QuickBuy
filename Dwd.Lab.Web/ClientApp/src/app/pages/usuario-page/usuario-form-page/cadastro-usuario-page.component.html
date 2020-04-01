@@ -3,14 +3,33 @@
     <div class="col-md-4 mb-3"> 
     </div>
     <div class="col-md-4 mb-3">
-      <label for="email">E-mail:</label>
-      <input type="text" class="form-control" name="email" id="email" placeholder="Informe o e-mail" style="margin-bottom: 3%;">  
+      <label for="emailUsuario">E-mail:</label>
+        <input type="text" class="form-control" name="email" id="email" style="margin-bottom: 3%;"
+        placeholder="Informe o seu e-mail"
+        email
+        required
+        [(ngModel)]="usuario.email"
+        #email = "ngModel"
+        [ngClass] = "{'is-invalid': email.touched && email.errors.required }"
+        >  
       
       <label for="senha">Senha:</label>
-      <input type="password" class="form-control" name="senha" id="senha" placeholder="Informe uma senha" style="margin-bottom: 3%;">
+      <input type="password" class="form-control" name="senhaEspelho" id="senhaEspelho" style="margin-bottom: 3%;"
+      placeholder="Informe uma senha"
+      [(ngModel)] = "senhaEspelho"
+      senha
+      #senha = "ngModel"
+      required
+      [ngClass] = "{'is-invalid': senha.touched && senha.invalid}">
 
-      <label for="senha1">Senha:</label>
-      <input type="password" class="form-control" name="senha1" id="senha1" placeholder="Repita a senha" style="margin-bottom: 3%;">
+      <label for="usuarioSenha">Senha:</label>
+      <input type="password" class="form-control" name="usuarioSenha" id="usuarioSenha" style="margin-bottom: 3%;"
+      placeholder="Repita a mesma senha"
+      [(ngModel)] = "usuario.senha"
+      uSenha
+      #uSenha = "ngModel"
+      required
+      [ngClass] = "{'is-invalid': uSenha.invalid && uSenha.touched}">
 
       <div class="custom-control custom-radio custom-control-inline">
         <input type="radio" id="pessoaJuridica" name="pessoaTipo" class="custom-control-input" style="margin-bottom: 3%;">
@@ -24,7 +43,7 @@
 
       <p style="margin-top: 3%;">Selecione sua imagem de perfil:</p>
       <div class="custom-file">        
-        <input type="file" class="custom-file-input" id="inputGroupFile04" (change)="inputChange($event.target.files)" placeholder="Perfil">
+        <input type="file" class="custom-file-input" id="inputGroupFile04"  placeholder="Perfil">
         <label class="custom-file-label" for="inputGroupFile04"> Buscar </label>
       </div>
     </div>
